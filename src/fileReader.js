@@ -9,6 +9,7 @@ export function readFile(path) {
         console.error(`File at "${path}" not found`);
     }
 
+    console.log(`Reading content of file at ${path}`);
     const data = fs.readFileSync(path);
     return String(data);
 }

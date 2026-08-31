@@ -9,5 +9,6 @@ export function writeFile(path, content) {
         console.error(`File at "${path}" not found`);
     }
 
+    console.log(`Writing content to file at ${path}`);
     fs.writeFileSync(path, content);
 }
