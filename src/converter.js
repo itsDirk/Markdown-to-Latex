@@ -1,5 +1,6 @@
 export function convertToLatex(content) {
     content = replaceLink(content);
+    content = replaceRegex(content, /`.*?`/g, 1, -1, "\\texttt\{", "\}");
     content = replaceRegex(content, /\*\*.*?\*\*/g, 2, -2, "\\textbf\{", "\}");
     content = replaceRegex(content, /\*.*?\*/g, 1, -1, "\\textit\{", "\}");
     content = replaceRegex(content, /### .*?(?:\n|$)/g, 4, -1, "\\subsubsection\{", "\}\n");
