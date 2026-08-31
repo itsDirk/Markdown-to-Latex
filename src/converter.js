@@ -1,4 +1,5 @@
 export function convertToLatex(content) {
+    content = replaceBoldText(content);
     content = replaceSubsubsection(content);
     content = replaceSubsection(content);
     content = replaceSection(content);
@@ -17,7 +18,7 @@ function initialize(content) {
 }
 
 function replaceSection(content) {
-    const regex = new RegExp(/# .*\n/g);
+    const regex = new RegExp(/# .*(?:\n|$)/g);
     let matches = content.matchAll(regex);
 
     for (const match of matches) {
@@ -31,7 +32,7 @@ function replaceSection(content) {
 }
 
 function replaceSubsection(content) {
-    const regex = new RegExp(/## .*\n/g);
+    const regex = new RegExp(/## .*(?:\n|$)/g);
     let matches = content.matchAll(regex);
 
     for (const match of matches) {
@@ -45,13 +46,26 @@ function replaceSubsection(content) {
 }
 
 function replaceSubsubsection(content) {
-    const regex = new RegExp(/### .*\n/g);
+    const regex = new RegExp(/### .*(?:\n|$)/g);
     let matches = content.matchAll(regex);
 
     for (const match of matches) {
         let result = match[0].slice(4, -1);
         result = result.replace(/#/g, "");
         result = `\\subsubsection\{${result}\}\n`;
+
+        content = content.replace(match[0], result);
+    }
+    return content;
+}
+
+function replaceBoldText(content) {
+    const regex = new RegExp(/\*\*.*\*\*/g);
+    let matches = content.matchAll(regex);
+
+    for (const match of matches) {
+        let result = match[0].slice(2, -2);
+        result = `\\textbf\{${result}\}`;
 
         content = content.replace(match[0], result);
     }
