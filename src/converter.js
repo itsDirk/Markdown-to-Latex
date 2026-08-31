@@ -1,11 +1,21 @@
 export function convertToLatex(content) {
-    content = replaceBoldText(content);
-    content = replaceItalicText(content);
-    content = replaceSubsubsection(content);
-    content = replaceSubsection(content);
-    content = replaceSection(content);
+    content = replaceRegex(content, /\*\*.*?\*\*/g, 2, -2, "\\textbf\{", "\}");
+    content = replaceRegex(content, /\*.*?\*/g, 1, -1, "\\textit\{", "\}");
+    content = replaceRegex(content, /### .*?(?:\n|$)/g, 4, -1, "\\subsubsection\{", "\}\n");
+    content = replaceRegex(content, /## .*?(?:\n|$)/g, 3, -1, "\\subsection\{", "\}\n");
+    content = replaceRegex(content, /# .*?(?:\n|$)/g, 2, -1, "\\section\{", "\}\n");
     content = initialize(content);
     return content;
+}
+
+function replaceRegex(content, regex, sliceStart, sliceEnd, resultStart, resultEnd) {
+        let matches = content.matchAll(regex);
+        for (const match of matches) {
+            let result = match[0].slice(sliceStart, sliceEnd);
+            result = `${resultStart}${result}${resultEnd}`;
+            content = content.replace(match[0], result);
+        }
+        return content;
 }
 
 function initialize(content) {
@@ -14,74 +24,5 @@ function initialize(content) {
         `\\begin{document}\n` +
         content + `\n` +
         `\\end{document}`;
-
-    return content;
-}
-
-function replaceSection(content) {
-    const regex = new RegExp(/# .*?(?:\n|$)/g);
-    let matches = content.matchAll(regex);
-
-    for (const match of matches) {
-        let result = match[0].slice(2, -1);
-        result = result.replace(/#/g, "");
-        result = `\\section\{${result}\}\n`;
-
-        content = content.replace(match[0], result);
-    }
-    return content;
-}
-
-function replaceSubsection(content) {
-    const regex = new RegExp(/## .*?(?:\n|$)/g);
-    let matches = content.matchAll(regex);
-
-    for (const match of matches) {
-        let result = match[0].slice(3, -1);
-        result = result.replace(/#/g, "");
-        result = `\\subsection\{${result}\}\n`;
-
-        content = content.replace(match[0], result);
-    }
-    return content;
-}
-
-function replaceSubsubsection(content) {
-    const regex = new RegExp(/### .*?(?:\n|$)/g);
-    let matches = content.matchAll(regex);
-
-    for (const match of matches) {
-        let result = match[0].slice(4, -1);
-        result = result.replace(/#/g, "");
-        result = `\\subsubsection\{${result}\}\n`;
-
-        content = content.replace(match[0], result);
-    }
-    return content;
-}
-
-function replaceBoldText(content) {
-    const regex = new RegExp(/\*\*.*?\*\*/g);
-    let matches = content.matchAll(regex);
-
-    for (const match of matches) {
-        let result = match[0].slice(2, -2);
-        result = `\\textbf\{${result}\}`;
-
-        content = content.replace(match[0], result);
-    }
-    return content;
-}
-
-function replaceItalicText(content) {
-    const regex = new RegExp(/\*.*?\*/g);
-    let matches = content.matchAll(regex);
-
-    for (const match of matches) {
-        let result = match[0].slice(1, -1);
-        result = `\\textit\{${result}\}`;
-
-        content = content.replace(match[0], result);
-    }
     return content;
 }

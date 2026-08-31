@@ -19,6 +19,6 @@ Voluptatem esse laborum doloremque adipisci non.
 
 \#Lorem
 
-# Lorem # Lorem # Lorem
+# Lorem Lorem Lorem
 
 ## Lorem
