@@ -2,8 +2,8 @@ import {readFile} from "./fileReader.js";
 import {writeFile} from "./fileWriter.js";
 import {convertToLatex} from "./converter.js";
 
-const inputPath = "./input/italictext.md";
-const outputPath = "./output/italictext.tex";
+const inputPath = "./input/link.md";
+const outputPath = "./output/link.tex";
 
 let content = readFile(inputPath);
 content = convertToLatex(content);
