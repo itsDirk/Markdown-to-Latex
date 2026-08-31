@@ -11,7 +11,7 @@ export function readFile(path) {
         return;
     }
 
-    console.log(`Reading content of file at ${path}`);
+    // console.log(`Reading content of file at ${path}`);
     const data = fs.readFileSync(path);
     return String(data);
 }

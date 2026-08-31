@@ -16,6 +16,6 @@ export function writeFile(path, content) {
         console.log(`Creating new file "${fileName}" at ${newPath}`);
     }
 
-    console.log(`Writing content to file at ${path}`);
+    // console.log(`Writing content to file at ${path}`);
     fs.writeFileSync(path, content);
 }
