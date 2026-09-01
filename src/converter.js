@@ -1,8 +1,10 @@
 export function convertToLatex(content) {
-    // Comments in JetBrains IDE's
-    content = replaceRegex(content, /\n\n\[\/\/]: # (.*?)/g, 10, -1, "\n\n%", "");
     // Comments in Obsidian
-    content = replaceRegex(content, /%%.*?%%/g, 2, -2, "%", "\n");
+    content = replaceComment(content, /%%.*?%%/gs, 2, -2, "%", "\n", "\n%");
+    // Comments in JetBrains IDE's
+    content = replaceComment(content, /\n\n\[\/\/]: # (.*?)/g, 10, -1, "\n\n%", "", "\n%");
+    // Comments in Visual Studio Code
+    content = replaceComment(content, /<!-- ?.*? ?-->/gs, 4, -3, "%", "", "\n%");
 
     let codeLines = [];
     content = content.replace(/(?<!`)`(?!`)(.*?)(?<!`)`(?!`)/g, match => {
@@ -46,6 +48,17 @@ function replaceHyperLink(content) {
         let result = match[0].slice(1, -1);
         let results = result.split("](");
         result = `\\href{${results[1]}}{${results[0]}}`;
+        content = content.replace(match[0], result);
+    }
+    return content;
+}
+
+function replaceComment(content, regex, sliceStart, sliceEnd, resultStart, resultEnd, lineBreaks = "\n") {
+    let matches = content.matchAll(regex);
+    for (const match of matches) {
+        let result = match[0].slice(sliceStart, sliceEnd);
+        result = result.replaceAll("\n",lineBreaks);
+        result = `${resultStart}${result}${resultEnd}`;
         content = content.replace(match[0], result);
     }
     return content;
