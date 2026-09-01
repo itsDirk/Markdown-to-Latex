@@ -5,6 +5,7 @@ export function convertToLatex(content) {
     ({content, codeLines, codeBlocks} = removeCodeBlocks(content));
 
     content = replaceHyperLink(content);
+    content = replaceUnorderedList(content);
     content = replaceRegex(content, /\*\*.*?\*\*/g, 2, -2, "\\textbf{", "}");
     content = replaceRegex(content, /\*.*?\*/g, 1, -1, "\\textit{", "}");
     content = replaceSection(content, /### .*?(?:\n|$)/g, 4, -1, "\\subsubsection{", "}\n");
@@ -101,5 +102,16 @@ function restoreCodeBlocks(content, codeLines, codeBlocks) {
         return codeLines[id];
     });
 
+    return content;
+}
+
+function replaceUnorderedList(content) {
+    const matches = content.matchAll(/(\n[-*] .+)+/g);
+
+    for (const match of matches) {
+        let result = match[0].replaceAll(/\n[-*] /g, `\n\\item `);
+        result = `\\begin{itemize}${result}\\end{itemize}`;
+        content = content.replace(match[0], result);
+    }
     return content;
 }

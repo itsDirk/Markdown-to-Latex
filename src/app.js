@@ -2,8 +2,8 @@ import {readFile} from "./fileReader.js";
 import {writeFile} from "./fileWriter.js";
 import {convertToLatex} from "./converter.js";
 
-const inputPath = "./input/horizontalline.md";
-const outputPath = "./output/horizontalline.tex";
+const inputPath = "./input/unorderedlist.md";
+const outputPath = "./output/unorderedlist.tex";
 
 let content = readFile(inputPath);
 content = convertToLatex(content);
