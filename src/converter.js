@@ -110,8 +110,8 @@ function replaceUnorderedList(content) {
     const matches = content.matchAll(/(\n[-*] .+)+/g);
 
     for (const match of matches) {
-        let result = match[0].replaceAll(/\n[-*] /g, `\n\\item `);
-        result = `\\begin{itemize}${result}\\end{itemize}`;
+        let result = match[0].replaceAll(/\n[-*] /g, `\n\t\\item `);
+        result = `\n\\begin{itemize}${result}\n\\end{itemize}`;
         content = content.replace(match[0], result);
     }
     return content;
@@ -121,8 +121,8 @@ function replaceOrderedList(content) {
     const matches = content.matchAll(/(\n(\d+)\. .+)+/g);
 
     for (const match of matches) {
-        let result = match[0].replace(/\n(\d+)\. /g, `\n\\item `);
-        result = `\\begin{enumerate}${result}\\end{enumerate}`;
+        let result = match[0].replace(/\n(\d+)\. /g, `\n\t\\item `);
+        result = `\n\\begin{enumerate}${result}\n\\end{enumerate}`;
         content = content.replace(match[0], result);
     }
     return content;
