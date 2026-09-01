@@ -59,6 +59,7 @@ function initialize(content) {
     content =
         `\\documentclass[a4paper]{article}\n` +
         `\\usepackage[colorlinks=true, urlcolor=blue, linkcolor=red]{hyperref}\n` +
+        `\\usepackage{amsmath}\n` +
         `\\begin{document}\n` +
         content + `\n` +
         `\\end{document}`;
