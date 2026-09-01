@@ -6,6 +6,7 @@ export function convertToLatex(content) {
 
     content = replaceHyperLink(content);
     content = replaceUnorderedList(content);
+    content = replaceOrderedList(content);
     content = replaceRegex(content, /\*\*.*?\*\*/g, 2, -2, "\\textbf{", "}");
     content = replaceRegex(content, /\*.*?\*/g, 1, -1, "\\textit{", "}");
     content = replaceSection(content, /### .*?(?:\n|$)/g, 4, -1, "\\subsubsection{", "}\n");
@@ -111,6 +112,17 @@ function replaceUnorderedList(content) {
     for (const match of matches) {
         let result = match[0].replaceAll(/\n[-*] /g, `\n\\item `);
         result = `\\begin{itemize}${result}\\end{itemize}`;
+        content = content.replace(match[0], result);
+    }
+    return content;
+}
+
+function replaceOrderedList(content) {
+    const matches = content.matchAll(/(\n(\d+)\. .+)+/g);
+
+    for (const match of matches) {
+        let result = match[0].replace(/\n(\d+)\. /g, `\n\\item `);
+        result = `\\begin{enumerate}${result}\\end{enumerate}`;
         content = content.replace(match[0], result);
     }
     return content;
