@@ -2,8 +2,8 @@ import {readFile} from "./fileReader.js";
 import {writeFile} from "./fileWriter.js";
 import {convertToLatex} from "./converter.js";
 
-const inputPath = "./input/codeblocktext.md";
-const outputPath = "./output/codeblocktext.tex";
+const inputPath = "./input/comment.md";
+const outputPath = "./output/comment.tex";
 
 let content = readFile(inputPath);
 content = convertToLatex(content);

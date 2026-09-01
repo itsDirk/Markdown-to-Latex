@@ -1,10 +1,13 @@
 export function convertToLatex(content) {
+    // Comments in JetBrains IDE's
+    content = replaceRegex(content, /\n\n\[\/\/]: # (.*?)/g, 10, -1, "\n\n%", "");
+
     let codeLines = [];
     content = content.replace(/(?<!`)`(?!`)(.*?)(?<!`)`(?!`)/g, match => {
         const id = codeLines.length;
         const code = match.slice(1, -1);
         codeLines.push(`\\texttt\{${code}\}`);
-        return `%%%CODE_LINE_${id}%%%`;
+        return `%#%CODE_LINE_${id}%#%`;
     });
 
     let codeBlocks = [];
@@ -12,20 +15,20 @@ export function convertToLatex(content) {
         const id = codeBlocks.length;
         const code = match.slice(3, -3);
         codeBlocks.push(`\\begin\{verbatim\}${code}\\end\{verbatim\}`);
-        return `%%%CODE_BLOCK_${id}%%%`;
+        return `%#%CODE_BLOCK_${id}%#%`;
     });
 
-    content = replaceLink(content);
+    content = replaceHyperLink(content);
     content = replaceRegex(content, /\*\*.*?\*\*/g, 2, -2, "\\textbf\{", "\}");
     content = replaceRegex(content, /\*.*?\*/g, 1, -1, "\\textit\{", "\}");
     content = replaceRegex(content, /### .*?(?:\n|$)/g, 4, -1, "\\subsubsection\{", "\}\n");
     content = replaceRegex(content, /## .*?(?:\n|$)/g, 3, -1, "\\subsection\{", "\}\n");
     content = replaceRegex(content, /# .*?(?:\n|$)/g, 2, -1, "\\section\{", "\}\n");
 
-    content = content.replace(/%%%CODE_BLOCK_(\d+)%%%/g, (_, id) => {
+    content = content.replace(/%#%CODE_BLOCK_(\d+)%#%/g, (_, id) => {
         return codeBlocks[id];
     });
-    content = content.replace(/%%%CODE_LINE_(\d+)%%%/g, (_, id) => {
+    content = content.replace(/%#%CODE_LINE_(\d+)%#%/g, (_, id) => {
         return codeLines[id];
     });
 
@@ -33,7 +36,7 @@ export function convertToLatex(content) {
     return content;
 }
 
-function replaceLink(content) {
+function replaceHyperLink(content) {
     let regex = new RegExp(/\[.*?]\(.*?\)/g);
     let matches = content.matchAll(regex);
 
