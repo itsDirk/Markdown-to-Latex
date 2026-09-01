@@ -10,7 +10,7 @@ export function convertToLatex(content) {
     content = content.replace(/(?<!`)`(?!`)(.*?)(?<!`)`(?!`)/g, match => {
         const id = codeLines.length;
         const code = match.slice(1, -1);
-        codeLines.push(`\\texttt\{${code}\}`);
+        codeLines.push(`\\texttt{${code}}`);
         return `%#%CODE_LINE_${id}%#%`;
     });
 
@@ -18,16 +18,16 @@ export function convertToLatex(content) {
     content = content.replace(/```.*?```/gs, match => {
         const id = codeBlocks.length;
         const code = match.slice(3, -3);
-        codeBlocks.push(`\\begin\{verbatim\}${code}\\end\{verbatim\}`);
+        codeBlocks.push(`\\begin{verbatim}${code}\\end{verbatim}`);
         return `%#%CODE_BLOCK_${id}%#%`;
     });
 
     content = replaceHyperLink(content);
-    content = replaceRegex(content, /\*\*.*?\*\*/g, 2, -2, "\\textbf\{", "\}");
-    content = replaceRegex(content, /\*.*?\*/g, 1, -1, "\\textit\{", "\}");
-    content = replaceRegex(content, /### .*?(?:\n|$)/g, 4, -1, "\\subsubsection\{", "\}\n");
-    content = replaceRegex(content, /## .*?(?:\n|$)/g, 3, -1, "\\subsection\{", "\}\n");
-    content = replaceRegex(content, /# .*?(?:\n|$)/g, 2, -1, "\\section\{", "\}\n");
+    content = replaceRegex(content, /\*\*.*?\*\*/g, 2, -2, "\\textbf{", "}");
+    content = replaceRegex(content, /\*.*?\*/g, 1, -1, "\\textit{", "}");
+    content = replaceRegex(content, /### .*?(?:\n|$)/g, 4, -1, "\\subsubsection{", "}\n");
+    content = replaceRegex(content, /## .*?(?:\n|$)/g, 3, -1, "\\subsection{", "}\n");
+    content = replaceRegex(content, /# .*?(?:\n|$)/g, 2, -1, "\\section{", "}\n");
     content = replaceRegex(content, /(?:\n|^) *--- *(?:\n|$)/g, 999, 0, "\\par\\noindent\\rule{\\textwidth}{0.4pt}\n", "");
 
     content = content.replace(/%#%CODE_BLOCK_(\d+)%#%/g, (_, id) => {
