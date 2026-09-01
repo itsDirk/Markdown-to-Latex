@@ -1,4 +1,4 @@
-## Some very important computations
+# Some very important computations
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec turpis magna. Morbi eget leo vel velit tincidunt bibendum. Etiam at dui eget quam vulputate pulvinar. Praesent varius vitae justo quis eleifend. Phasellus interdum ipsum ex, vitae accumsan magna porttitor eu. Proin venenatis consequat leo in $+10\%$ sagittis. In eu vehicula nisl, sit amet rhoncus elit. Vivamus ac metus non magna congue scelerisque. Vivamus sollicitudin libero ac quam porta, in aliquet magna blandit. In faucibus purus vel auctor pellentesque. Maecenas malesuada leo id dolor rutrum placerat. Sed nulla magna, ultrices eu arcu id, sagittis aliquam elit.
 $$123kJ = 321,0Wh = 0,000013kWh$$In ut dolor mollis, ultrices lacus nec, tincidunt tortor. Curabitur convallis libero sit amet sem vestibulum luctus. $-10\%$ Sed $CO_2$ molestie nulla vel egestas finibus. Phasellus fermentum ut diam vel tempus. Nunc at mattis sapien. Donec turpis risus, rutrum at venenatis in, bibendum at ante. Nunc eget accumsan dui, eget consectetur diam. Nunc et tellus ante. Quisque congue ex ut urna pellentesque fermentum.
 $$345.0Wh \cdot 9\cdot10^1 = 987.654.321Wh = 123MWh$$
@@ -8,3 +8,7 @@ Vivamus pulvinar euismod mattis. Duis id dui eget massa interdum semper. Donec v
 $$
 1.000.000kWh \cdot 123g \approx 54.321kg 
 $$
+
+## Sources
+1. Lorem ipsum. (n.d.). _dolor - sit/amet: consectetur adipiscing elit_. Pellentesque. https://www.lipsum.com/feed/html
+2. In ut dolor. (n.d.). mollis - _ultrices/lacus: lacus nec, tincidunt tortor_. Curabitur. https://www.lipsum.com/feed/html
