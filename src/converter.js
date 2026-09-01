@@ -1,4 +1,8 @@
 export function convertToLatex(content) {
+    if (!content) {
+        return initialize();
+    }
+
     content = replaceComments(content);
 
     let codeLines, codeBlocks;
@@ -11,6 +15,7 @@ export function convertToLatex(content) {
     content = replaceRegex(content, /\*.*?\*/g, 1, -1, "\\textit{", "}");
     content = replaceRegex(content, /__.*?__/g, 2, -2, "\\textbf{", "}");
     content = replaceRegex(content, /_.*?_/g, 1, -1, "\\textit{", "}");
+    content = replaceRegex(content, /~~.*?~~/g, 2, -2, "\\underline{", "}");
     content = replaceSection(content, /### .*?(?:\n|$)/g, 4, -1, "\\subsubsection{", "}\n");
     content = replaceSection(content, /## .*?(?:\n|$)/g, 3, -1, "\\subsection{", "}\n");
     content = replaceSection(content, /# .*?(?:\n|$)/g, 2, -1, "\\section{", "}\n");

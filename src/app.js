@@ -2,8 +2,8 @@ import {readFile} from "./fileReader.js";
 import {writeFile} from "./fileWriter.js";
 import {convertToLatex} from "./converter.js";
 
-const inputPath = "./input/mathtext.md";
-const outputPath = "./output/mathtext.tex";
+const inputPath = "./input/strikethroughtext.md";
+const outputPath = "./output/strikethroughtext.tex";
 
 let content = readFile(inputPath);
 content = convertToLatex(content);
