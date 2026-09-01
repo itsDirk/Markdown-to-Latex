@@ -1,26 +1,33 @@
 export function convertToLatex(content) {
-    content = replaceLink(content);
-
-    let codeBlocks = [];
-    content = content.replace(/`.*?`/g, match => {
-        const id = codeBlocks.length;
-        codeBlocks.push(match);
+    let codeLines = [];
+    content = content.replace(/(?<!`)`(?!`)(.*?)(?<!`)`(?!`)/g, match => {
+        const id = codeLines.length;
+        const code = match.slice(1, -1);
+        codeLines.push(`\\texttt\{${code}\}`);
         return `%%%CODE_LINE_${id}%%%`;
     });
 
-    console.log(codeBlocks);
+    let codeBlocks = [];
+    content = content.replace(/```.*?```/gs, match => {
+        const id = codeBlocks.length;
+        const code = match.slice(3, -3);
+        codeBlocks.push(`\\begin\{verbatim\}${code}\\end\{verbatim\}`);
+        return `%%%CODE_BLOCK_${id}%%%`;
+    });
 
+    content = replaceLink(content);
     content = replaceRegex(content, /\*\*.*?\*\*/g, 2, -2, "\\textbf\{", "\}");
     content = replaceRegex(content, /\*.*?\*/g, 1, -1, "\\textit\{", "\}");
     content = replaceRegex(content, /### .*?(?:\n|$)/g, 4, -1, "\\subsubsection\{", "\}\n");
     content = replaceRegex(content, /## .*?(?:\n|$)/g, 3, -1, "\\subsection\{", "\}\n");
     content = replaceRegex(content, /# .*?(?:\n|$)/g, 2, -1, "\\section\{", "\}\n");
 
-    content = content.replace(/%%%CODE_LINE_(\d+)%%%/g, (_, id) => {
+    content = content.replace(/%%%CODE_BLOCK_(\d+)%%%/g, (_, id) => {
         return codeBlocks[id];
     });
-
-    content = replaceRegex(content, /`.*?`/g, 1, -1, "\\texttt\{", "\}");
+    content = content.replace(/%%%CODE_LINE_(\d+)%%%/g, (_, id) => {
+        return codeLines[id];
+    });
 
     content = initialize(content);
     return content;
@@ -40,13 +47,13 @@ function replaceLink(content) {
 }
 
 function replaceRegex(content, regex, sliceStart, sliceEnd, resultStart, resultEnd) {
-        let matches = content.matchAll(regex);
-        for (const match of matches) {
-            let result = match[0].slice(sliceStart, sliceEnd);
-            result = `${resultStart}${result}${resultEnd}`;
-            content = content.replace(match[0], result);
-        }
-        return content;
+    let matches = content.matchAll(regex);
+    for (const match of matches) {
+        let result = match[0].slice(sliceStart, sliceEnd);
+        result = `${resultStart}${result}${resultEnd}`;
+        content = content.replace(match[0], result);
+    }
+    return content;
 }
 
 function initialize(content) {
