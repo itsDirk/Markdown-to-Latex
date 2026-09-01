@@ -1,6 +1,8 @@
 export function convertToLatex(content) {
     // Comments in JetBrains IDE's
     content = replaceRegex(content, /\n\n\[\/\/]: # (.*?)/g, 10, -1, "\n\n%", "");
+    // Comments in Obsidian
+    content = replaceRegex(content, /%%.*?%%/g, 2, -2, "%", "\n");
 
     let codeLines = [];
     content = content.replace(/(?<!`)`(?!`)(.*?)(?<!`)`(?!`)/g, match => {
