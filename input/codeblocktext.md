@@ -9,7 +9,7 @@ consequatur aperiam deserunt.*
 
 ```
 Praesentium omnis `impedit` dolorem alias.
-Esse qu`od *dolores* **quidem** error corrupti tempora quae.
+Esse qu`od *dolores* **quidem error corrupti tempora quae.
 Natus ut delectus vo*luptatib*us ist`e tenetur.
 ```
 

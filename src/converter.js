@@ -1,26 +1,8 @@
 export function convertToLatex(content) {
-    // Comments in Obsidian
-    content = replaceRegex(content, /%%.*?%%/gs, 2, -2, "%", "\n", "\n%");
-    // Comments in JetBrains IDE's
-    content = replaceRegex(content, /\n\n\[\/\/]: # (.*?)/g, 10, -1, "\n\n%", "", "\n%");
-    // Comments in Visual Studio Code
-    content = replaceRegex(content, /<!-- ?.*? ?-->/gs, 4, -3, "%", "", "\n%");
+    content = replaceComments(content);
 
-    let codeLines = [];
-    content = content.replace(/(?<!`)`(?!`)(.*?)(?<!`)`(?!`)/g, match => {
-        const id = codeLines.length;
-        const code = match.slice(1, -1);
-        codeLines.push(`\\texttt{${code}}`);
-        return `%#%CODE_LINE_${id}%#%`;
-    });
-
-    let codeBlocks = [];
-    content = content.replace(/```.*?```/gs, match => {
-        const id = codeBlocks.length;
-        const code = match.slice(3, -3);
-        codeBlocks.push(`\\begin{verbatim}${code}\\end{verbatim}`);
-        return `%#%CODE_BLOCK_${id}%#%`;
-    });
+    let codeLines, codeBlocks;
+    ({content, codeLines, codeBlocks} = removeCodeBlocks(content));
 
     content = replaceHyperLink(content);
     content = replaceRegex(content, /\*\*.*?\*\*/g, 2, -2, "\\textbf{", "}");
@@ -30,12 +12,7 @@ export function convertToLatex(content) {
     content = replaceRegex(content, /# .*?(?:\n|$)/g, 2, -1, "\\section{", "}\n");
     content = replaceRegex(content, /(?:\n|^) *--- *(?:\n|$)/g, 999, 0, "\\par\\noindent\\rule{\\textwidth}{0.4pt}\n", "");
 
-    content = content.replace(/%#%CODE_BLOCK_(\d+)%#%/g, (_, id) => {
-        return codeBlocks[id];
-    });
-    content = content.replace(/%#%CODE_LINE_(\d+)%#%/g, (_, id) => {
-        return codeLines[id];
-    });
+    content = restoreCodeBlocks(content, codeLines, codeBlocks);
 
     content = initialize(content);
     return content;
@@ -72,5 +49,46 @@ function initialize(content) {
         `\\begin{document}\n` +
         content + `\n` +
         `\\end{document}`;
+    return content;
+}
+
+function replaceComments(content) {
+    // Comments in Obsidian
+    content = replaceRegex(content, /%%.*?%%/gs, 2, -2, "%", "\n", "\n%");
+    // Comments in JetBrains IDE's
+    content = replaceRegex(content, /\n\n\[\/\/]: # (.*?)/g, 10, -1, "\n\n%", "", "\n%");
+    // Comments in Visual Studio Code
+    content = replaceRegex(content, /<!-- ?.*? ?-->/gs, 4, -3, "%", "", "\n%");
+    return content
+}
+
+function removeCodeBlocks(content) {
+    let codeLines = [];
+    content = content.replace(/(?<!`)`(?!`)(.*?)(?<!`)`(?!`)/g, match => {
+        const id = codeLines.length;
+        const code = match.slice(1, -1);
+        codeLines.push(`\\texttt{${code}}`);
+        return `%#%CODE_LINE_${id}%#%`;
+    });
+
+    let codeBlocks = [];
+    content = content.replace(/```.*?```/gs, match => {
+        const id = codeBlocks.length;
+        const code = match.slice(3, -3);
+        codeBlocks.push(`\\begin{verbatim}${code}\\end{verbatim}`);
+        return `%#%CODE_BLOCK_${id}%#%`;
+    });
+
+    return {content, codeLines, codeBlocks};
+}
+
+function restoreCodeBlocks(content, codeLines, codeBlocks) {
+    content = content.replace(/%#%CODE_BLOCK_(\d+)%#%/g, (_, id) => {
+        return codeBlocks[id];
+    });
+    content = content.replace(/%#%CODE_LINE_(\d+)%#%/g, (_, id) => {
+        return codeLines[id];
+    });
+
     return content;
 }
