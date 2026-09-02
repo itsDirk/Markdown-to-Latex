@@ -143,20 +143,16 @@ function replaceImage(content) {
 
     for (const match of matches) {
         let path = match[0].slice(3, -2);
+        let scale = 1;
         if (new RegExp(/.+\|(\d+)/).test(path)) {
-            let obsidianSize = path.split("|")[1];
-            let scale = (obsidianSize/700).toFixed(3);
+            let size = path.split("|")[1];
             path = path.split("|")[0];
-            let result = `\\begin{figure}\n\t\\centering` +
-                `\n\t\\includegraphics[width=${scale}\\linewidth]{${path}}` +
-                `\n\t\\caption{My Caption}\n\\end{figure}`
-            content = content.replace(match[0], result);
-        } else {
-            let result = `\\begin{figure}\n\t\\centering` +
-                `\n\t\\includegraphics[width=1\\linewidth]{${path}}` +
-                `\n\t\\caption{My Caption}\n\\end{figure}`
-            content = content.replace(match[0], result);
+            scale = (size / 700).toFixed(3);
         }
+        let result = `\\begin{figure}\n\t\\centering` +
+            `\n\t\\includegraphics[width=${scale}\\linewidth]{${path}}` +
+            `\n\t\\caption{My Caption}\n\\end{figure}`
+        content = content.replace(match[0], result);
     }
     return content;
 }
