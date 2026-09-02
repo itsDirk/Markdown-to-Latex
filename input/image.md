@@ -21,3 +21,18 @@ Voluptatem esse laborum doloremque adipisci non.
 
 ### Alt text + caption
 ![Alt text](images/image1.png "The actual caption")
+
+### Scaled alt text + caption
+![Alt text|675](images/image2.png "The actual caption")
+
+### Scaled empty alt text + caption
+![562](images/image3.png "The actual caption")
+
+### Scaled empty alt text + caption with bar
+![|511](images/image4.png "The actual caption")
+
+### Scaled bad alt text + caption
+![|e558](images/image5.png "The actual caption")
+
+### Scaled empty alt text + empty caption
+![623](images/image1.png "")

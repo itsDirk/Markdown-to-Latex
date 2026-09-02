@@ -168,7 +168,7 @@ function replaceImageCaption(content) {
 
         let caption;
 
-        if (new RegExp(/!\[.*]\(.+? ".*"\)/).test(match[0])){
+        if (new RegExp(/!\[.*]\(.+? ".*"\)/).test(match[0])) {
             caption = path.split(" \"")[1].slice(0, -1);
             path = path.split(" \"")[0];
         }
@@ -177,6 +177,10 @@ function replaceImageCaption(content) {
         if (new RegExp(/.+?\|(\d+)/).test(altText)) {
             let size = altText.split("|")[1];
             altText = altText.split("|")[0];
+            scale = (size / 700).toFixed(3);
+        } else if (new RegExp(/^\|?(\d+)$/).test(altText)) {
+            let size = altText.replace("|", "");
+            altText = altText.replace(size, "");
             scale = (size / 700).toFixed(3);
         }
 
