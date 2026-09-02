@@ -8,10 +8,11 @@ export function convertToLatex(content) {
     let codeLines, codeBlocks;
     ({content, codeLines, codeBlocks} = removeCodeBlocks(content));
 
+    content = replaceImage(content);
+    content = replaceImage2(content);
     content = replaceHyperLink(content);
     content = replaceUnorderedList(content);
     content = replaceOrderedList(content);
-    content = replaceImage(content);
     content = replaceRegex(content, /\*\*.*?\*\*/g, 2, -2, "\\textbf{", "}");
     content = replaceRegex(content, /\*.*?\*/g, 1, -1, "\\textit{", "}");
     content = replaceRegex(content, /__.*?__/g, 2, -2, "\\textbf{", "}");
@@ -139,7 +140,7 @@ function replaceOrderedList(content) {
 }
 
 function replaceImage(content) {
-    const matches = content.matchAll(/!\[\[.+]]/g);
+    const matches = content.matchAll(/!\[\[.+?]]/g);
 
     for (const match of matches) {
         let path = match[0].slice(3, -2);
@@ -151,7 +152,30 @@ function replaceImage(content) {
         }
         let result = `\\begin{figure}\n\t\\centering` +
             `\n\t\\includegraphics[width=${scale}\\linewidth]{${path}}` +
-            `\n\t\\caption{My Caption}\n\\end{figure}`
+            `\n\\end{figure}`
+        content = content.replace(match[0], result);
+    }
+    return content;
+}
+
+function replaceImage2(content) {
+    const matches = content.matchAll(/!\[.*]\(.+?\)/g);
+
+    for (const match of matches) {
+        let path = match[0].slice(2, -1);
+        let caption = path.split("](")[0];
+        path = path.split("](")[1];
+
+        let scale = 1;
+        console.log(caption);
+        if (new RegExp(/.+?\|(\d+)/).test(caption)) {
+            let size = caption.split("|")[1];
+            caption = caption.split("|")[0];
+            scale = (size / 700).toFixed(3);
+        }
+        let result = `\\begin{figure}\n\t\\centering` +
+            `\n\t\\includegraphics[width=${scale}\\linewidth]{${path}}` +
+            `\n\t\\caption{${caption}}\n\\end{figure}`
         content = content.replace(match[0], result);
     }
     return content;
