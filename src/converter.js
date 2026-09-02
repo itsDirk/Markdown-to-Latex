@@ -11,6 +11,7 @@ export function convertToLatex(content) {
     content = replaceHyperLink(content);
     content = replaceUnorderedList(content);
     content = replaceOrderedList(content);
+    content = replaceImage(content);
     content = replaceRegex(content, /\*\*.*?\*\*/g, 2, -2, "\\textbf{", "}");
     content = replaceRegex(content, /\*.*?\*/g, 1, -1, "\\textit{", "}");
     content = replaceRegex(content, /__.*?__/g, 2, -2, "\\textbf{", "}");
@@ -67,6 +68,7 @@ function initialize(content) {
         `\\documentclass[a4paper]{article}\n` +
         `\\usepackage[colorlinks=true, urlcolor=blue, linkcolor=red]{hyperref}\n` +
         `\\usepackage{amsmath}\n` +
+        `\\usepackage{graphicx}\n` +
         `\\begin{document}\n` +
         content + `\n` +
         `\\end{document}`;
@@ -132,6 +134,28 @@ function replaceOrderedList(content) {
         let result = match[0].replace(/\n(\d+)\. /g, `\n\t\\item `);
         result = `\n\\begin{enumerate}${result}\n\\end{enumerate}`;
         content = content.replace(match[0], result);
+    }
+    return content;
+}
+
+function replaceImage(content) {
+    const matches = content.matchAll(/!\[\[.+]]/g);
+
+    for (const match of matches) {
+        let path = match[0].slice(3, -2);
+        if (new RegExp(/.+\|(\d+)/).test(path)) {
+            let size = path.split("|")[1];
+            path = path.split("|")[0];
+            let result = `\\begin{figure}\n\t\\centering` +
+                `\n\t\\includegraphics[width=1\\linewidth]{${path}}` +
+                `\n\t\\caption{My Caption}\n\\end{figure}`
+            content = content.replace(match[0], result);
+        } else {
+            let result = `\\begin{figure}\n\t\\centering` +
+                `\n\t\\includegraphics[width=1\\linewidth]{${path}}` +
+                `\n\t\\caption{My Caption}\n\\end{figure}`
+            content = content.replace(match[0], result);
+        }
     }
     return content;
 }
