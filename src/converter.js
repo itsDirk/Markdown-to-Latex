@@ -9,7 +9,7 @@ export function convertToLatex(content) {
     ({content, codeLines, codeBlocks} = removeCodeBlocks(content));
 
     content = replaceImage(content);
-    content = replaceImage2(content);
+    content = replaceImageCaption(content);
     content = replaceHyperLink(content);
     content = replaceUnorderedList(content);
     content = replaceOrderedList(content);
@@ -158,24 +158,37 @@ function replaceImage(content) {
     return content;
 }
 
-function replaceImage2(content) {
+function replaceImageCaption(content) {
     const matches = content.matchAll(/!\[.*]\(.+?\)/g);
 
     for (const match of matches) {
         let path = match[0].slice(2, -1);
-        let caption = path.split("](")[0];
+        let altText = path.split("](")[0];
         path = path.split("](")[1];
 
+        let caption;
+
+        if (new RegExp(/!\[.*]\(.+? ".*"\)/).test(match[0])){
+            caption = path.split(" \"")[1].slice(0, -1);
+            path = path.split(" \"")[0];
+        }
+
         let scale = 1;
-        console.log(caption);
-        if (new RegExp(/.+?\|(\d+)/).test(caption)) {
-            let size = caption.split("|")[1];
-            caption = caption.split("|")[0];
+        if (new RegExp(/.+?\|(\d+)/).test(altText)) {
+            let size = altText.split("|")[1];
+            altText = altText.split("|")[0];
             scale = (size / 700).toFixed(3);
         }
+
         let result = `\\begin{figure}\n\t\\centering` +
-            `\n\t\\includegraphics[width=${scale}\\linewidth]{${path}}` +
-            `\n\t\\caption{${caption}}\n\\end{figure}`
+            `\n\t\\includegraphics[width=${scale}\\linewidth]{${path}}`;
+        if (caption) {
+            result += `\n\t\\caption{${caption}}`;
+        } else if (altText) {
+            result += `\n\t\\caption{${altText}}`;
+        }
+        result += `\n\\end{figure}`;
+
         content = content.replace(match[0], result);
     }
     return content;

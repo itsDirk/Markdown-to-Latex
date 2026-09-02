@@ -20,4 +20,4 @@ Voluptatem esse laborum doloremque adipisci non.
 ![](images/image5.png)
 
 ### Alt text + caption
-![Alt text](images/image6.png "The actual caption")
+![Alt text](images/image1.png "The actual caption")
