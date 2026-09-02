@@ -92,7 +92,7 @@ function removeCodeBlocks(content) {
         const id = codeLines.length;
         const code = match.slice(1, -1);
         codeLines.push(`\\texttt{${code}}`);
-        return `%#%CODE_LINE_${id}%#%`;
+        return `%#%CODE=LINE=${id}%#%`;
     });
 
     let codeBlocks = [];
@@ -100,17 +100,17 @@ function removeCodeBlocks(content) {
         const id = codeBlocks.length;
         const code = match.slice(3, -3);
         codeBlocks.push(`\\begin{verbatim}${code}\\end{verbatim}`);
-        return `%#%CODE_BLOCK_${id}%#%`;
+        return `%#%CODE=BLOCK=${id}%#%`;
     });
 
     return {content, codeLines, codeBlocks};
 }
 
 function restoreCodeBlocks(content, codeLines, codeBlocks) {
-    content = content.replace(/%#%CODE_BLOCK_(\d+)%#%/g, (_, id) => {
+    content = content.replace(/%#%CODE=BLOCK=(\d+)%#%/g, (_, id) => {
         return codeBlocks[id];
     });
-    content = content.replace(/%#%CODE_LINE_(\d+)%#%/g, (_, id) => {
+    content = content.replace(/%#%CODE=LINE=(\d+)%#%/g, (_, id) => {
         return codeLines[id];
     });
 
