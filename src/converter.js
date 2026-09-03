@@ -161,14 +161,15 @@ function replaceOrderedList(content, dept = 0) {
                     result += replaceOrderedList("\n" + currentGroup.join("\n"), dept + 1);
                     currentGroup = [];
                 }
-                row = row.replace(/(\d+)\. /, `\n\t\\item `);
+                row = row.replace(/(\d+)\. /, `\n${"\t".repeat(dept+1)}\\item `);
                 result += row;
             }
-            if (i === rows.length - 1) {
+            if (i === rows.length - 1 && currentGroup.length > 0) {
                 result += replaceOrderedList("\n" + currentGroup.join("\n"), dept + 1);
             }
         }
-        result = `\n\\begin{enumerate}${result}\n\\end{enumerate}`;
+        result = `\n${"\t".repeat(dept)}\\begin{enumerate}` +
+            `${result}\n${"\t".repeat(dept)}\\end{enumerate}`;
 
         content = content.replace(match[0], result);
     }

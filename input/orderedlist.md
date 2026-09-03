@@ -26,7 +26,7 @@ The end?
 1. First
 	1. Second
 		1. Third
-			1. Fouth
+			1. Fourth
 2. Second
 	1. Third
 	2. Fourth
