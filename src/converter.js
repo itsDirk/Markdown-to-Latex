@@ -25,9 +25,9 @@ export function convertToLatex(content) {
 }
 
 function replaceSections(content) {
-    content = replaceSection(content, /### .*?(?:\n|$)/g, 4, -1, "\\subsubsection{", "}\n");
-    content = replaceSection(content, /## .*?(?:\n|$)/g, 3, -1, "\\subsection{", "}\n");
-    content = replaceSection(content, /# .*?(?:\n|$)/g, 2, -1, "\\section{", "}\n");
+    content = replaceRegex(content, /### .*?(?:\n|$)/g, 4, -1, "\\subsubsection{", "}\n", /(?<!\\)#/g, "\\\#");
+    content = replaceRegex(content, /## .*?(?:\n|$)/g, 3, -1, "\\subsection{", "}\n", /(?<!\\)#/g, "\\\#");
+    content = replaceRegex(content, /# .*?(?:\n|$)/g, 2, -1, "\\section{", "}\n", /(?<!\\)#/g, "\\\#");
     return content;
 }
 
@@ -53,22 +53,14 @@ function replaceHyperLink(content) {
     return content;
 }
 
-function replaceRegex(content, regex, sliceStart, sliceEnd, resultStart, resultEnd, lineBreaker = "\n") {
+function replaceRegex(content, regex, sliceStart, sliceEnd,
+                      resultStart, resultEnd, replaceContent = null, replacedContent = null) {
     let matches = content.matchAll(regex);
     for (const match of matches) {
         let result = match[0].slice(sliceStart, sliceEnd);
-        result = result.replaceAll("\n", lineBreaker);
-        result = `${resultStart}${result}${resultEnd}`;
-        content = content.replace(match[0], result);
-    }
-    return content;
-}
-
-function replaceSection(content, regex, sliceStart, sliceEnd, resultStart, resultEnd) {
-    let matches = content.matchAll(regex);
-    for (const match of matches) {
-        let result = match[0].slice(sliceStart, sliceEnd);
-        result = result.replace(/(?<!\\)#/g, "\\\#");
+        if (replaceContent && replacedContent) {
+            result = result.replaceAll(replaceContent, replacedContent);
+        }
         result = `${resultStart}${result}${resultEnd}`;
         content = content.replace(match[0], result);
     }
