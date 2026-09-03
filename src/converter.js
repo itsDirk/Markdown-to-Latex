@@ -1,3 +1,5 @@
+import {setUseLinks, setUseImages, setUseMath, useLinks, useImages, useMath} from "./config.js";
+
 export function convertToLatex(content) {
     if (!content) {
         return initialize();
@@ -8,8 +10,7 @@ export function convertToLatex(content) {
     let codeLines, codeBlocks;
     ({content, codeLines, codeBlocks} = removeCodeBlocks(content));
 
-    content = replaceImage(content);
-    content = replaceImageCaption(content);
+    content = replaceImages(content);
     content = replaceHyperLink(content);
     content = replaceUnorderedList(content);
     content = replaceOrderedList(content);
@@ -24,9 +25,7 @@ export function convertToLatex(content) {
     content = replaceRegex(content, /(?:\n|^) *--- *(?:\n|$)/g, 999, 0, "\\par\\noindent\\rule{\\textwidth}{0.4pt}\n", "");
 
     content = cleanContent(content);
-
     content = restoreCodeBlocks(content, codeLines, codeBlocks);
-
     content = initialize(content);
     return content;
 }
@@ -66,16 +65,28 @@ function replaceSection(content, regex, sliceStart, sliceEnd, resultStart, resul
     return content;
 }
 
+function findUsedPackages(content) {
+    if (new RegExp(/\\href{.*?}{.*?}/).test(content)) {
+        setUseLinks(true);
+    }
+    if (new RegExp(/\$.*?\$/).test(content)) {
+        setUseMath(true);
+    }
+    if (new RegExp(/\\includegraphics/).test(content)) {
+        setUseImages(true);
+    }
+}
+
 function initialize(content) {
-    content =
-        `\\documentclass[a4paper]{article}\n` +
-        `\\usepackage[colorlinks=true, urlcolor=blue, linkcolor=red]{hyperref}\n` +
-        `\\usepackage{amsmath}\n` +
-        `\\usepackage{graphicx}\n` +
-        `\\begin{document}\n` +
-        content + `\n` +
-        `\\end{document}`;
-    return content;
+    findUsedPackages(content);
+
+    let output = `\\documentclass[a4paper]{article}\n`;
+    if (useLinks) output += `\\usepackage[colorlinks=true, urlcolor=blue, linkcolor=red]{hyperref}\n`;
+    if (useMath) output += `\\usepackage{amsmath}\n`;
+    if (useImages) output += `\\usepackage{graphicx}\n`;
+    output += `\\begin{document}\n${content}\n\\end{document}`;
+
+    return output;
 }
 
 function replaceComments(content) {
@@ -141,6 +152,12 @@ function replaceOrderedList(content) {
     return content;
 }
 
+function replaceImages(content) {
+    content = replaceImage(content);
+    content = replaceImageCaption(content);
+    return content;
+}
+
 function replaceImage(content) {
     const matches = content.matchAll(/!\[\[.+?]]/g);
 
@@ -201,7 +218,7 @@ function replaceImageCaption(content) {
 }
 
 function cleanContent(content) {
-    content = content.replaceAll("​","");
+    content = content.replaceAll("​", "");
     content = content.replaceAll("\\[", "[");
     content = content.replaceAll("\\]", "]");
     content = content.replaceAll("\\%", "%");
