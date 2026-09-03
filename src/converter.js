@@ -3,6 +3,8 @@ export function convertToLatex(content) {
         return initialize();
     }
 
+    content = sanitizeContent(content);
+
     content = replaceComments(content);
 
     let codeLines, codeBlocks;
@@ -196,4 +198,8 @@ function replaceImageCaption(content) {
         content = content.replace(match[0], result);
     }
     return content;
+}
+
+function sanitizeContent(content) {
+    return content.replaceAll("​","");
 }

@@ -5,3 +5,4 @@ node_modules
 /input/REPORT.*
 /output
 /input/images/
+/input/report/

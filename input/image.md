@@ -16,6 +16,9 @@ Voluptatem esse laborum doloremque adipisci non.
 ### Image with alt text scaled
 ![This is alt text|529](images/image4.png)
 
+### Image with alt text badly scaled
+![This is alt text|e529](images/image1.png)
+
 ### Image with empty alt text
 ![](images/image5.png)
 
