@@ -151,22 +151,21 @@ function replaceOrderedList(content, dept = 0) {
         let currentGroup = [];
         let result = "";
 
-        for (let row of rows) {
+        for (let i = 0; i < rows.length; i++) {
+            let row = rows[i]
             let newDept = row.match(/\t/g)?.length || 0;
-            if (dept === newDept || newDept < dept) {
+            if (dept < newDept) {
+                currentGroup.push(row);
+            } else if (dept === newDept) {
                 if (currentGroup.length > 0) {
                     result += replaceOrderedList("\n" + currentGroup.join("\n"), dept + 1);
                     currentGroup = [];
                 }
                 row = row.replace(/(\d+)\. /, `\n\t\\item `);
                 result += row;
-            } else if (newDept > dept) {
-                currentGroup.push(row);
             }
-            if (row === rows[rows.length-1]) {
-                if (currentGroup.length > 0) {
-                    result += replaceOrderedList("\n" + currentGroup.join("\n"), dept + 1);
-                }
+            if (i === rows.length - 1) {
+                result += replaceOrderedList("\n" + currentGroup.join("\n"), dept + 1);
             }
         }
         result = `\n\\begin{enumerate}${result}\n\\end{enumerate}`;
