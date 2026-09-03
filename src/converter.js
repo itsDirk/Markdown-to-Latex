@@ -143,12 +143,34 @@ function replaceUnorderedList(content) {
     return content;
 }
 
-function replaceOrderedList(content) {
-    const matches = content.matchAll(/(\n(\d+)\. .+)+/g);
+function replaceOrderedList(content, dept = 0) {
+    const matches = content.matchAll(/(\n(\t)*(\d+)\. .+)+/g);
 
     for (const match of matches) {
-        let result = match[0].replace(/\n(\d+)\. /g, `\n\t\\item `);
+        let rows = match[0].split("\n");
+        let currentGroup = [];
+        let result = "";
+
+        for (let row of rows) {
+            let newDept = row.match(/\t/g)?.length || 0;
+            if (dept === newDept || newDept < dept) {
+                if (currentGroup.length > 0) {
+                    result += replaceOrderedList("\n" + currentGroup.join("\n"), dept + 1);
+                    currentGroup = [];
+                }
+                row = row.replace(/(\d+)\. /, `\n\t\\item `);
+                result += row;
+            } else if (newDept > dept) {
+                currentGroup.push(row);
+            }
+            if (row === rows[rows.length-1]) {
+                if (currentGroup.length > 0) {
+                    result += replaceOrderedList("\n" + currentGroup.join("\n"), dept + 1);
+                }
+            }
+        }
         result = `\n\\begin{enumerate}${result}\n\\end{enumerate}`;
+
         content = content.replace(match[0], result);
     }
     return content;
