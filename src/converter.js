@@ -4,7 +4,6 @@ export function convertToLatex(content) {
     }
 
     content = replaceComments(content);
-    content = sanitizeContent(content);
 
     let codeLines, codeBlocks;
     ({content, codeLines, codeBlocks} = removeCodeBlocks(content));
@@ -23,6 +22,8 @@ export function convertToLatex(content) {
     content = replaceSection(content, /## .*?(?:\n|$)/g, 3, -1, "\\subsection{", "}\n");
     content = replaceSection(content, /# .*?(?:\n|$)/g, 2, -1, "\\section{", "}\n");
     content = replaceRegex(content, /(?:\n|^) *--- *(?:\n|$)/g, 999, 0, "\\par\\noindent\\rule{\\textwidth}{0.4pt}\n", "");
+
+    content = cleanContent(content);
 
     content = restoreCodeBlocks(content, codeLines, codeBlocks);
 
@@ -93,7 +94,7 @@ function removeCodeBlocks(content) {
         const id = codeLines.length;
         const code = match.slice(1, -1);
         codeLines.push(`\\texttt{${code}}`);
-        return `%#%CODE=LINE=${id}%#%`;
+        return `=CODE=LINE=${id}=`;
     });
 
     let codeBlocks = [];
@@ -101,17 +102,17 @@ function removeCodeBlocks(content) {
         const id = codeBlocks.length;
         const code = match.slice(3, -3);
         codeBlocks.push(`\\begin{verbatim}${code}\\end{verbatim}`);
-        return `%#%CODE=BLOCK=${id}%#%`;
+        return `=CODE=BLOCK=${id}=`;
     });
 
     return {content, codeLines, codeBlocks};
 }
 
 function restoreCodeBlocks(content, codeLines, codeBlocks) {
-    content = content.replace(/%#%CODE=BLOCK=(\d+)%#%/g, (_, id) => {
+    content = content.replace(/=CODE=BLOCK=(\d+)=/g, (_, id) => {
         return codeBlocks[id];
     });
-    content = content.replace(/%#%CODE=LINE=(\d+)%#%/g, (_, id) => {
+    content = content.replace(/=CODE=LINE=(\d+)=/g, (_, id) => {
         return codeLines[id];
     });
 
@@ -199,9 +200,11 @@ function replaceImageCaption(content) {
     return content;
 }
 
-function sanitizeContent(content) {
+function cleanContent(content) {
     content = content.replaceAll("​","");
     content = content.replaceAll("\\[", "[");
     content = content.replaceAll("\\]", "]");
+    content = content.replaceAll("\\%", "%");
+    content = content.replaceAll("%", "\\%");
     return content;
 }
