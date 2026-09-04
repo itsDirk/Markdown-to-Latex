@@ -8,4 +8,4 @@ const outputPath = "./output/orderedlist.tex";
 let content = readFile(inputPath);
 content = convertToLatex(content);
 writeFile(outputPath, content);
-console.log(`Done!`);
+console.log(`Done!\nWrote output to ${outputPath}`);

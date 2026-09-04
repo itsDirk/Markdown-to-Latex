@@ -12,8 +12,8 @@ export function convertToLatex(content) {
 
     content = replaceImages(content);
     content = replaceHyperLink(content);
-    content = replaceUnorderedList(content);
-    content = replaceOrderedList(content);
+    content = replaceList(false, content);
+    content = replaceList(true, content);
     content = replaceTextStyling(content);
     content = replaceSections(content);
     content = replaceRegex(content, /(?:\n|^) *--- *(?:\n|$)/g, 999, 0, "\\par\\noindent\\rule{\\textwidth}{0.4pt}\n", "");
@@ -132,19 +132,13 @@ function restoreCodeBlocks(content, codeLines, codeBlocks) {
     return content;
 }
 
-function replaceUnorderedList(content) {
-    const matches = content.matchAll(/(\n[-*] .+)+/g);
-
-    for (const match of matches) {
-        let result = match[0].replaceAll(/\n[-*] /g, `\n\t\\item `);
-        result = `\n\\begin{itemize}${result}\n\\end{itemize}`;
-        content = content.replace(match[0], result);
+function replaceList(isOrdered, content, dept = 0) {
+    let matches;
+    if (isOrdered) {
+        matches = content.matchAll(/(\n(\t)*(\d+)\. .+)+/g);
+    } else {
+        matches = content.matchAll(/(\n(\t)*[-*] .+)+/g)
     }
-    return content;
-}
-
-function replaceOrderedList(content, dept = 0) {
-    const matches = content.matchAll(/(\n(\t)*(\d+)\. .+)+/g);
 
     for (const match of matches) {
         let rows = match[0].split("\n");
@@ -158,18 +152,27 @@ function replaceOrderedList(content, dept = 0) {
                 currentGroup.push(row);
             } else if (dept === newDept) {
                 if (currentGroup.length > 0) {
-                    result += replaceOrderedList("\n" + currentGroup.join("\n"), dept + 1);
+                    result += replaceList(isOrdered, "\n" + currentGroup.join("\n"), dept + 1);
                     currentGroup = [];
                 }
-                row = row.replace(/(\d+)\. /, `\n${"\t".repeat(dept+1)}\\item `);
+                if (isOrdered) {
+                    row = row.replace(/(\d+)\. /, `\n${"\t".repeat(dept + 1)}\\item `);
+                } else {
+                    row = row.replace(/[-*] /, `\n${"\t".repeat(dept + 1)}\\item `);
+                }
                 result += row;
             }
             if (i === rows.length - 1 && currentGroup.length > 0) {
-                result += replaceOrderedList("\n" + currentGroup.join("\n"), dept + 1);
+                result += replaceList(isOrdered, "\n" + currentGroup.join("\n"), dept + 1);
             }
         }
-        result = `\n${"\t".repeat(dept)}\\begin{enumerate}` +
-            `${result}\n${"\t".repeat(dept)}\\end{enumerate}`;
+        if (isOrdered) {
+            result = `\n${"\t".repeat(dept)}\\begin{enumerate}` +
+                `${result}\n${"\t".repeat(dept)}\\end{enumerate}`;
+        } else {
+            result = `\n${"\t".repeat(dept)}\\begin{itemize}` +
+                `${result}\n${"\t".repeat(dept)}\\end{itemize}`;
+        }
 
         content = content.replace(match[0], result);
     }
