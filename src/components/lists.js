@@ -1,5 +1,7 @@
 export function replaceLists(content) {
+    // Replace bullet-point list made with - or * and tab
     content = replaceList(false, content);
+    // Replace ordered list made with 1. 2. etc.
     content = replaceList(true, content);
     return content;
 }

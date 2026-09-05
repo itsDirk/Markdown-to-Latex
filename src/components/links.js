@@ -1,4 +1,5 @@
 export function replaceHyperLink(content) {
+    // Replace [Display text]{address} with \href{address}{Display text}
     let regex = new RegExp(/\[.*?]\(.*?\)/g);
     let matches = content.matchAll(regex);
 
