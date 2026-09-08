@@ -8,6 +8,7 @@ import {replaceHyperLink} from "./components/links.js";
 import {replaceImages} from "./components/images.js";
 import {replaceHorizontalLines} from "./components/lines.js";
 import {replaceTables} from "./components/tables.js";
+import {removeMathBlocks, restoreMathBlocks} from "./components/mathblocks.js";
 
 export function convertToLatex(content) {
     if (!content) {
@@ -19,6 +20,8 @@ export function convertToLatex(content) {
 
     let codeLines, codeBlocks;
     ({content, codeLines, codeBlocks} = removeCodeBlocks(content));
+    let mathLines, mathBlocks;
+    ({content, mathLines, mathBlocks} = removeMathBlocks(content));
 
     content = replaceImages(content);
     content = replaceHyperLink(content);
@@ -28,6 +31,7 @@ export function convertToLatex(content) {
     content = replaceTables(content);
     content = replaceHorizontalLines(content);
 
+    content = restoreMathBlocks(content, mathLines, mathBlocks);
     content = restoreCodeBlocks(content, codeLines, codeBlocks);
     content = initialize(content);
     return content;
