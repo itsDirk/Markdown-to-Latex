@@ -2,8 +2,8 @@ import {readFile} from "./fileReader.js";
 import {writeFile} from "./fileWriter.js";
 import {convertToLatex} from "./converter.js";
 
-const inputPath = "./input/report/REPORT.md";
-const outputPath = "./output/report/REPORT.tex";
+const inputPath = "./input/table.md";
+const outputPath = "./output/table.tex";
 
 let content = readFile(inputPath);
 content = convertToLatex(content);

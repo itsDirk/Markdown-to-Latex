@@ -7,6 +7,7 @@ import {replaceTextStyling} from "./components/styling.js";
 import {replaceHyperLink} from "./components/links.js";
 import {replaceImages} from "./components/images.js";
 import {replaceHorizontalLines} from "./components/lines.js";
+import {replaceTables} from "./components/tables.js";
 
 export function convertToLatex(content) {
     if (!content) {
@@ -23,6 +24,7 @@ export function convertToLatex(content) {
     content = replaceLists(content);
     content = replaceTextStyling(content);
     content = replaceSections(content);
+    content = replaceTables(content);
     content = replaceHorizontalLines(content);
 
     content = cleanContent(content);
