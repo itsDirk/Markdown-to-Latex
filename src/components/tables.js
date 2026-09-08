@@ -19,7 +19,8 @@ export function replaceTables(content) {
             let cells = row.split("|");
             cells.shift();
             cells.pop();
-            cells = cells.join("&");
+            cells = cells.map((cell) => cell.trim());
+            cells = cells.join(" & ");
             result += `\n\t${cells}\\\\`;
         }
         if (rows.length > 0) result += "\n\t\\hline";
