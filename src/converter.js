@@ -15,6 +15,7 @@ export function convertToLatex(content) {
     }
 
     content = replaceComments(content);
+    content = cleanContent(content);
 
     let codeLines, codeBlocks;
     ({content, codeLines, codeBlocks} = removeCodeBlocks(content));
@@ -27,7 +28,6 @@ export function convertToLatex(content) {
     content = replaceTables(content);
     content = replaceHorizontalLines(content);
 
-    content = cleanContent(content);
     content = restoreCodeBlocks(content, codeLines, codeBlocks);
     content = initialize(content);
     return content;
@@ -79,5 +79,6 @@ function cleanContent(content) {
     content = content.replaceAll("\\]", "]");
     content = content.replaceAll("\\%", "%");
     content = content.replaceAll("%", "\\%");
+    content = content.replaceAll("<br>", "\\\\");
     return content;
 }

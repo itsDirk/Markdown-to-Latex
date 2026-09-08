@@ -9,11 +9,12 @@ export function replaceTables(content) {
         headers = headers.split("|");
         headers.shift(); // Remove first
         headers.pop(); // Remove last
+        headers = headers.map((header) => header.includes("\\\\") ? `\\shortstack{${header}}` : header);
 
         let rows = table.split("\n");
         rows.shift(); // Remove first
 
-        let result = `\\hline${headers.join("&")}\\\\ \\hline`;
+        let result = `\t\\hline\n\t${headers.join("&")}\\\\\n\t\\hline`;
         for (const row of rows) {
             let cells = row.split("|");
             cells.shift();
@@ -21,7 +22,7 @@ export function replaceTables(content) {
             cells = cells.join("&");
             result += `\n\t${cells}\\\\`;
         }
-        if (rows.length > 0) result += "\n\\hline";
+        if (rows.length > 0) result += "\n\t\\hline";
 
         result = `\n\\begin{center}\n\\begin{tabular}` +
             `{${"|c".repeat(headers.length)}|}\n` +
