@@ -9,9 +9,9 @@ export function replaceLists(content) {
 function replaceList(isOrdered, content, dept = 0) {
     let matches;
     if (isOrdered) {
-        matches = content.matchAll(/(\n(\t)*(\d+)\. .+)+/g);
+        matches = content.matchAll(/(\n(\t| {2})*(\d+)\. .+)+/g);
     } else {
-        matches = content.matchAll(/(\n(\t)*[-*] .+)+/g)
+        matches = content.matchAll(/(\n(\t| {2})*[-*] .+)+/g)
     }
 
     for (const match of matches) {
@@ -21,7 +21,7 @@ function replaceList(isOrdered, content, dept = 0) {
 
         for (let i = 0; i < rows.length; i++) {
             let row = rows[i]
-            let newDept = row.match(/\t/g)?.length || 0;
+            let newDept = row.match(/\t| {2}/g)?.length || 0;
             if (dept < newDept) {
                 currentGroup.push(row);
             } else if (dept === newDept) {
