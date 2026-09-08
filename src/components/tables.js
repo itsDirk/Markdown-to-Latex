@@ -1,9 +1,33 @@
 export function replaceTables(content) {
-    let matches = content.matchAll(/(\n\|.*\|)\n\|( *-+ *\|)+(\n\|.*\|)*/g)
+    let matches = content.matchAll(/(\n\|.*\|)(\n\|( *-+ *\|)+)(\n\|.*\|)*/g)
 
     for (const match of matches) {
-        console.log("===========Match==============");
-        console.log(`${match[0]}`);
+        let headers = match[1];
+        let divider = match[2];
+        let table = match[0].replace(headers, "").replace(divider, "");
+
+        headers = headers.split("|");
+        headers.shift(); // Remove first
+        headers.pop(); // Remove last
+
+        let rows = table.split("\n");
+        rows.shift(); // Remove first
+
+        let result = `\\hline${headers.join("&")}\\\\ \\hline`;
+        for (const row of rows) {
+            let cells = row.split("|");
+            cells.shift();
+            cells.pop();
+            cells = cells.join("&");
+            result += `\n\t${cells}\\\\`;
+        }
+        if (rows.length > 0) result += "\n\\hline";
+
+        result = `\n\\begin{center}\n\\begin{tabular}` +
+            `{${"|c".repeat(headers.length)}|}\n` +
+            result +
+            `\n\\end{tabular}\n\\end{center}`;
+        content = content.replace(match[0], result);
     }
 
     return content;
