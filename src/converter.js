@@ -16,7 +16,7 @@ export function convertToLatex(content) {
     }
 
     content = replaceComments(content);
-    content = cleanContent(content);
+    content = preClean(content);
 
     let codeLines, codeBlocks;
     ({content, codeLines, codeBlocks} = removeCodeBlocks(content));
@@ -31,6 +31,7 @@ export function convertToLatex(content) {
     content = replaceTables(content);
     content = replaceHorizontalLines(content);
 
+    content = postClean(content);
     content = restoreMathBlocks(content, mathLines, mathBlocks);
     content = restoreCodeBlocks(content, codeLines, codeBlocks);
     content = initialize(content);
@@ -38,7 +39,7 @@ export function convertToLatex(content) {
 }
 
 export function replaceRegex(content, regex, sliceStart, sliceEnd,
-                      resultStart, resultEnd, replaceContent = null, replacedContent = null) {
+                             resultStart, resultEnd, replaceContent = null, replacedContent = null) {
     let matches = content.matchAll(regex);
     for (const match of matches) {
         let result = match[0].slice(sliceStart, sliceEnd);
@@ -76,13 +77,17 @@ function initialize(content) {
 }
 
 
-
-function cleanContent(content) {
+function preClean(content) {
     content = content.replaceAll("​", "");
     content = content.replaceAll("\\[", "[");
     content = content.replaceAll("\\]", "]");
     content = content.replaceAll("\\%", "%");
     content = content.replaceAll("%", "\\%");
     content = content.replaceAll("<br>", "\\\\");
+    return content
+}
+
+function postClean(content) {
+    content = content.replaceAll("\\|", "|");
     return content;
 }
