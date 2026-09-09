@@ -21,7 +21,7 @@ function replaceList(isOrdered, content, dept = 0) {
 
         for (let i = 0; i < rows.length; i++) {
             let row = rows[i]
-            let newDept = row.match(/\t| {2}/g)?.length || 0;
+            let newDept = row.replace(/([\t ])+$/g,"").match(/\t| {2}/g)?.length || 0;
             if (dept < newDept) {
                 currentGroup.push(row);
             } else if (dept === newDept) {
