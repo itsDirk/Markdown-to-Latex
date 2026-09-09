@@ -43,16 +43,16 @@ export function replaceRegex(content, regex, sliceStart, sliceEnd,
     let matches = content.matchAll(regex);
     for (const match of matches) {
         let result = match[0].slice(sliceStart, sliceEnd);
-        if (replaceContent && replacedContent) {
+        if (replaceContent !== null && replacedContent !== null) {
             result = result.replaceAll(replaceContent, replacedContent);
         }
-        result = `${resultStart}${result}${resultEnd}`;
+        result = resultStart + result + resultEnd;
         content = content.replace(match[0], result);
     }
     return content;
 }
 
-function findUsedPackages(content) {
+function findRequiredPackages(content) {
     if (new RegExp(/\\href{.*?}{.*?}/).test(content)) {
         setUseLinks(true);
     }
@@ -65,7 +65,7 @@ function findUsedPackages(content) {
 }
 
 function initialize(content) {
-    findUsedPackages(content);
+    findRequiredPackages(content);
 
     let output = `\\documentclass[a4paper]{article}\n`;
     if (useLinks) output += `\\usepackage[colorlinks=true, urlcolor=blue, linkcolor=red]{hyperref}\n`;
