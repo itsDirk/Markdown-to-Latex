@@ -1,9 +1,9 @@
-import {readFile} from "./fileReader.js";
-import {writeFile} from "./fileWriter.js";
+import {readFile} from "./fileio/fileReader.js";
+import {writeFile} from "./fileio/fileWriter.js";
 import {convertToLatex} from "./converter.js";
 
-const inputPath = "./input/subsubsection.md";
-const outputPath = "./output/subsubsection.tex";
+const inputPath = "./input/comment.md";
+const outputPath = "./output/comment.tex";
 
 let content = readFile(inputPath);
 content = convertToLatex(content);

@@ -15,7 +15,6 @@ export function convertToLatex(content) {
         return initialize();
     }
 
-    content = replaceComments(content);
     content = preClean(content);
 
     let codeLines, codeBlocks;
@@ -27,6 +26,7 @@ export function convertToLatex(content) {
     content = replaceHyperLink(content);
     content = replaceLists(content);
     content = replaceTextStyling(content);
+    content = replaceComments(content);
     content = replaceSections(content);
     content = replaceTables(content);
     content = replaceHorizontalLines(content);
