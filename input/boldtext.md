@@ -8,6 +8,7 @@ Natus ut delectus vo**luptatib**us iste tenetur.
 
 ## Voluptatem esse laborum doloremque adipisci non.
 
+## Stars
 ****
 ** **
 **  **
@@ -15,5 +16,18 @@ Natus ut delectus vo**luptatib**us iste tenetur.
 ** Space bold text**
 **Bold text space **
 ** Space bold text space **
+**Bold text
+** Space bold text
+
+## Underscores
+____
+__ __
+__  __
+__Bold text__
+__ Space bold text__
+__Bold text space __
+__ Space bold text space __
+__Bold text
+__ Space bold text
 
 

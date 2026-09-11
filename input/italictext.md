@@ -20,6 +20,7 @@ Praesentium omnis impedit dolorem alias.
 
 ***Hello world***
 
+## Stars
 **
 * *
 *  *
@@ -27,4 +28,16 @@ Praesentium omnis impedit dolorem alias.
 * Space italic text*
 *Italic text space *
 * Space italic text space *
+*Italic text
+* Space italic text
 
+## Underscores
+__
+_ _
+_  _
+_Italic text_
+_ Space italic text_
+_Italic text space _
+_ Space italic text space _
+_Italic text
+_ Space italic text

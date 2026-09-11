@@ -7,3 +7,12 @@ Voluptatem esse laborum dolo~~rem~~que adipisci non.
 
 ## ~~test~~test
 sbsdbb
+
+## Edge cases  
+
+~~Bold text~~  
+~~ Space bold text~~  
+~~Bold text space ~~  
+~~ Space bold text space ~~  
+~~Bold text
+~~ Space bold text
