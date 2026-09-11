@@ -4,6 +4,8 @@ export function replaceHorizontalLines(content) {
     // Replace --- with a horizontal line
     content = replaceRegex(content, /(?<=\n|^) *--- *(\n|$)/g, 999, 0, "\\par\\noindent\\rule{\\textwidth}{0.4pt}\n", "");
     // Replace *** with a horizontal line
-    content = replaceRegex(content, /(?<=\n|^) *\*\*\* *(\n|$)/g, 999, 0, "\\par\\noindent\\rule{\\textwidth}{0.4pt}\n", "");
+    content = replaceRegex(content, /(?<=\n|^) *\* *\* *\*[* ]*(\n|$)/g, 999, 0, "\\par\\noindent\\rule{\\textwidth}{0.4pt}\n", "");
+    // Replace ___ with a horizontal line
+    content = replaceRegex(content, /(?<=\n|^) *___ *(\n|$)/g, 999, 0, "\\par\\noindent\\rule{\\textwidth}{0.4pt}\n", "");
     return content;
 }
