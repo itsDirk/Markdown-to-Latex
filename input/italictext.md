@@ -19,3 +19,12 @@ Praesentium omnis impedit dolorem alias.
 **Test** **Test**
 
 ***Hello world***
+
+**
+* *
+*  *
+*Italic text*
+* Space italic text*
+*Italic text space *
+* Space italic text space *
+
