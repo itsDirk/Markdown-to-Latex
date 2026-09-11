@@ -24,8 +24,8 @@ export function convertToLatex(content) {
 
     content = replaceImages(content);
     content = replaceHyperLink(content);
-    content = replaceLists(content);
     content = replaceHorizontalLines(content);
+    content = replaceLists(content);
     content = replaceTextStyling(content);
     content = replaceSections(content);
     content = replaceTables(content);
