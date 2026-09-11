@@ -12,7 +12,7 @@ import {removeMathBlocks, restoreMathBlocks} from "./components/mathblocks.js";
 
 export function convertToLatex(content) {
     if (!content) {
-        return initialize();
+        return initializeDocument();
     }
 
     content = preClean(content);
@@ -26,15 +26,15 @@ export function convertToLatex(content) {
     content = replaceHyperLink(content);
     content = replaceLists(content);
     content = replaceTextStyling(content);
-    content = replaceComments(content);
     content = replaceSections(content);
     content = replaceTables(content);
     content = replaceHorizontalLines(content);
+    content = replaceComments(content);
 
     content = postClean(content);
     content = restoreMathBlocks(content, mathLines, mathBlocks);
     content = restoreCodeBlocks(content, codeLines, codeBlocks);
-    content = initialize(content);
+    content = initializeDocument(content);
     return content;
 }
 
@@ -64,7 +64,7 @@ function findRequiredPackages(content) {
     }
 }
 
-function initialize(content) {
+function initializeDocument(content) {
     findRequiredPackages(content);
 
     let output = `\\documentclass[a4paper]{article}\n`;
