@@ -1,0 +1,25 @@
+h1 {
+    text-align: center;
+}
+
+.binary-container {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+.input-output-container {
+    flex: 1;
+}
+
+textarea {
+    box-sizing: border-box;
+    width: 100%;
+    resize: none;
+    overflow: hidden;
+    min-height: 5em;
+    height: auto;
+}

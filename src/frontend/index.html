@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Markdown to LaTeX</title>
-    <script src="../app.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="script.js"></script>
 </head>
 <body>
 <h1>Markdown to LaTeX converter</h1>
 <div class="binary-container">
     <div class="input-output-container">
-        
+        <textarea placeholder="Paste Markdown here..."></textarea>
     </div>
+    <button type="button" id="convert-button">Convert</button>
     <div class="input-output-container">
-
+        <textarea placeholder="LaTeX appears here..."></textarea>
     </div>
 </div>
 </body>
