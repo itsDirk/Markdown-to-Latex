@@ -12,7 +12,7 @@ import {removeMathBlocks, restoreMathBlocks} from "./components/mathblocks.js";
 
 export function convertToLatex(content) {
     if (!content) {
-        return initializeDocument();
+        return initializeDocument("");
     }
 
     content = preClean(content);
