@@ -1,6 +1,6 @@
-import {readFile} from "./fileio/fileReader.js";
-import {writeFile} from "./fileio/fileWriter.js";
-import {convertToLatex} from "./converter.js";
+import {readFile} from "./converter/fileio/fileReader.js";
+import {writeFile} from "./converter/fileio/fileWriter.js";
+import {convertToLatex} from "./converter/converter.js";
 
 const inputPath = "./input/horizontalline.md";
 const outputPath = "./output/horizontalline.tex";
