@@ -9,13 +9,30 @@
 </head>
 <body>
 <h1>Markdown to LaTeX converter</h1>
-<div class="binary-container">
+<div class="settings-container">
+    <div class="settings-sub-container">
+        Table options
+        <div class="setting">
+            <input type="checkbox" id="table1">
+            <label for="table1">Table headers in boldface</label>
+        </div>
+        <div class="setting">
+            <input type="checkbox" id="table2">
+            <label for="table2">Outline every row</label>
+        </div>
+        <div class="setting">
+            <input type="checkbox" id="table3" checked>
+            <label for="table3">Outline every column</label>
+        </div>
+    </div>
+</div>
+<div class="io-container">
     <div class="input-output-container">
-        <textarea placeholder="Paste Markdown here..."></textarea>
+        <textarea placeholder="Paste Markdown here..." class="io-textarea"></textarea>
     </div>
     <button type="button" id="convert-button">Convert</button>
     <div class="input-output-container">
-        <textarea placeholder="LaTeX appears here..."></textarea>
+        <textarea placeholder="LaTeX appears here..." class="io-textarea"></textarea>
     </div>
 </div>
 </body>

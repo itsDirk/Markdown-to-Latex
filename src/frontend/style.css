@@ -2,7 +2,7 @@ h1 {
     text-align: center;
 }
 
-.binary-container {
+.io-container {
     display: flex;
     width: 100%;
     gap: 1rem;
@@ -15,11 +15,16 @@ h1 {
     flex: 1;
 }
 
-textarea {
+.io-textarea {
     box-sizing: border-box;
     width: 100%;
     resize: none;
     overflow: hidden;
-    min-height: 5em;
+    min-height: 10em;
     height: auto;
+}
+
+.settings-sub-container {
+    display: flex;
+    flex-direction: column;
 }
