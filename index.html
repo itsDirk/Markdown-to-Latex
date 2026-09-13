@@ -14,7 +14,7 @@
         Table options
         <div class="setting">
             <input type="checkbox" id="table1">
-            <label for="table1">Table headers in boldface</label>
+            <label for="table1">Headers in boldface</label>
         </div>
         <div class="setting">
             <input type="checkbox" id="table2">
@@ -24,8 +24,10 @@
             <input type="checkbox" id="table3" checked>
             <label for="table3">Outline every column</label>
         </div>
+    </div>
+    <div class="settings-sub-container">
         <div class="setting radio-buttons">
-            <span>Align cell content</span>
+            <span>Align table content</span>
             <label>
                 <input type="radio" name="table-content-align" value="center" checked>
                 Center
@@ -42,14 +44,18 @@
     </div>
 </div>
 <div class="io-container">
-    <div class="input-output-container">
+    <div class="input-output-field">
         <textarea placeholder="Paste Markdown here..." class="io-textarea"></textarea>
     </div>
     <button type="button" id="convert-button">Convert</button>
-    <div class="input-output-container">
+    <div class="input-output-field">
         <button type="button" id="copy-button" class="copy-button">Copy</button>
         <textarea placeholder="LaTeX appears here..." class="io-textarea"></textarea>
     </div>
 </div>
+<footer>
+    Made with ❤️ •
+    <a href="https://github.com/itsDirk/Markdown-to-Latex">GitHub</a>
+</footer>
 </body>
 </html>
