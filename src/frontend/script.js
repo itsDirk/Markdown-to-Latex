@@ -2,9 +2,10 @@ import {convertToLatex} from "../converter/converter.js";
 import {config} from "../converter/config.js";
 
 const textAreas = Array.from(document.querySelectorAll("textarea"));
+const copyButton = document.getElementById("copy-button");
 const convertButton = document.getElementById("convert-button");
-const input = textAreas[0];
-const output = textAreas[1];
+const inputField = textAreas[0];
+const outputField = textAreas[1];
 
 function syncTextareaHeights() {
     textAreas.forEach((textarea) => {
@@ -32,8 +33,12 @@ convertButton.addEventListener("click", () => {
     config.settings.outlineRows = outlineRows;
     config.settings.outlineColumns = outlineColumns;
 
-    output.value = convertToLatex(input.value);
+    outputField.value = convertToLatex(inputField.value);
     syncTextareaHeights();
+});
+
+copyButton.addEventListener("click", async () => {
+    await navigator.clipboard.writeText(outputField.value);
 });
 
 syncTextareaHeights();

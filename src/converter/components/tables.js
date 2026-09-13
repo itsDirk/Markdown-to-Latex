@@ -34,7 +34,7 @@ export function replaceTables(content) {
             tableStructure = "|" + "c".repeat(headers.length) + "|";
         }
 
-        result = `\n\\begin{center}\n\\begin{tabular}` +
+        result = `\\begin{center}\n\\begin{tabular}` +
             `{${tableStructure}}\n` +
             result +
             `\n\\end{tabular}\n\\end{center}`;
