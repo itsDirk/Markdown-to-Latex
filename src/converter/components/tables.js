@@ -1,7 +1,7 @@
 import {config} from "../config.js";
 
 export function replaceTables(content) {
-    let matches = content.matchAll(/(\n\|.*\|)(\n\|( *-+ *\|)+)(\n\|.*\|)*/g)
+    let matches = content.matchAll(/((?<=\n|^)\|.*\|)(\n\|( *-+ *\|)+)(\n\|.*\|)*/g)
 
     for (const match of matches) {
         let headers = match[1];
