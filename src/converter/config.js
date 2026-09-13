@@ -14,3 +14,11 @@ export function setUseImages(value) {
     useImages = value;
 }
 
+export const config = {
+    packages: [],
+    settings: {
+        tableHeadersBold: false,
+        outlineRows: false,
+        outlineColumns: true
+    }
+};

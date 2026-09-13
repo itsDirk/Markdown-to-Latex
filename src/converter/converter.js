@@ -1,4 +1,4 @@
-import {setUseLinks, setUseImages, setUseMath, useLinks, useImages, useMath} from "./config.js";
+import {config} from "./config.js";
 import {replaceComments} from "./components/comments.js";
 import {replaceLists} from "./components/lists.js";
 import {removeCodeBlocks, restoreCodeBlocks} from "./components/codeblocks.js";
@@ -54,13 +54,13 @@ export function replaceRegex(content, regex, sliceStart, sliceEnd,
 
 function findRequiredPackages(content) {
     if (new RegExp(/\\href{.*?}{.*?}/).test(content)) {
-        setUseLinks(true);
+        config.packages.push("\\usepackage[colorlinks=true, urlcolor=blue, linkcolor=red]{hyperref}");
     }
     if (new RegExp(/\$.*?\$/).test(content)) {
-        setUseMath(true);
+        config.packages.push("\\usepackage{amsmath}");
     }
     if (new RegExp(/\\includegraphics/).test(content)) {
-        setUseImages(true);
+        config.packages.push("\\usepackage{graphicx}");
     }
 }
 
@@ -68,9 +68,9 @@ function initializeDocument(content) {
     findRequiredPackages(content);
 
     let output = `\\documentclass[a4paper]{article}\n`;
-    if (useLinks) output += `\\usepackage[colorlinks=true, urlcolor=blue, linkcolor=red]{hyperref}\n`;
-    if (useMath) output += `\\usepackage{amsmath}\n`;
-    if (useImages) output += `\\usepackage{graphicx}\n`;
+    for (const index in config.packages) {
+        output += config.packages[index] + "\n";
+    }
     output += `\\begin{document}\n${content}\n\\end{document}`;
 
     return output;

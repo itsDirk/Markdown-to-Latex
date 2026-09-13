@@ -1,4 +1,5 @@
 import {convertToLatex} from "../converter/converter.js";
+import {config} from "../converter/config.js";
 
 const textAreas = Array.from(document.querySelectorAll("textarea"));
 const convertButton = document.getElementById("convert-button");
@@ -22,6 +23,14 @@ textAreas.forEach((textarea) => {
 });
 
 convertButton.addEventListener("click", () => {
+    const tableHeadersBold = document.getElementById("table1")?.checked || false;
+    const outlineRows = document.getElementById("table2")?.checked || false;
+    const outlineColumns = document.getElementById("table3")?.checked || false;
+
+    config.settings.tableHeadersBold = tableHeadersBold;
+    config.settings.outlineRows = outlineRows;
+    config.settings.outlineColumns = outlineColumns;
+
     output.value = convertToLatex(input.value);
     syncTextareaHeights();
 });
