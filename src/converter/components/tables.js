@@ -23,8 +23,9 @@ export function replaceTables(content) {
             cells = cells.map((cell) => cell.trim());
             cells = cells.join(" & ");
             result += `\n\t${cells} \\\\`;
+            if (config.settings.outlineRows) result += `\n\t\\hline`;
         }
-        if (rows.length > 0) result += "\n\t\\hline";
+        if (rows.length > 0 && !config.settings.outlineRows) result += "\n\t\\hline";
 
         let tableStructure;
         if (config.settings.outlineColumns) {
