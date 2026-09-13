@@ -26,8 +26,15 @@ export function replaceTables(content) {
         }
         if (rows.length > 0) result += "\n\t\\hline";
 
+        let tableStructure;
+        if (config.settings.outlineColumns) {
+            tableStructure = "|c".repeat(headers.length) + "|";
+        } else {
+            tableStructure = "|" + "c".repeat(headers.length) + "|";
+        }
+
         result = `\n\\begin{center}\n\\begin{tabular}` +
-            `{${"|c".repeat(headers.length)}|}\n` +
+            `{${tableStructure}}\n` +
             result +
             `\n\\end{tabular}\n\\end{center}`;
         content = content.replace(match[0], result);
