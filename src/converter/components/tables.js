@@ -1,3 +1,5 @@
+import {config} from "../config.js";
+
 export function replaceTables(content) {
     let matches = content.matchAll(/(\n\|.*\|)(\n\|( *-+ *\|)+)(\n\|.*\|)*/g)
 
@@ -10,6 +12,7 @@ export function replaceTables(content) {
         headers = headers.map((header) => header.trim()); // Remove leading and trailing spaces
         // "<br>" are replaced with "\\". If a cell contains these, wrap them in \shortstack{} to format them properly
         headers = headers.map((header) => header.includes("\\\\") ? `\\shortstack{${header}}` : header);
+        if (config.settings.tableHeadersBold) headers = headers.map((header) => `\\textbf{${header}}`);
 
         let rows = table.split("\n");
         rows.shift(); // Remove first
