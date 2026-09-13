@@ -27,6 +27,7 @@ convertButton.addEventListener("click", () => {
     const outlineRows = document.getElementById("table2")?.checked || false;
     const outlineColumns = document.getElementById("table3")?.checked || false;
 
+    config.packages = [];
     config.settings.tableHeadersBold = tableHeadersBold;
     config.settings.outlineRows = outlineRows;
     config.settings.outlineColumns = outlineColumns;
