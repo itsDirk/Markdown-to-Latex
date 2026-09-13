@@ -27,11 +27,13 @@ convertButton.addEventListener("click", () => {
     const tableHeadersBold = document.getElementById("table1")?.checked || false;
     const outlineRows = document.getElementById("table2")?.checked || false;
     const outlineColumns = document.getElementById("table3")?.checked || false;
+    const alignTableContent = document.querySelector('input[name="table-content-align"]:checked').value;
 
     config.packages = [];
     config.settings.tableHeadersBold = tableHeadersBold;
     config.settings.outlineRows = outlineRows;
     config.settings.outlineColumns = outlineColumns;
+    config.settings.alignTableContent = alignTableContent;
 
     outputField.value = convertToLatex(inputField.value);
     syncTextareaHeights();

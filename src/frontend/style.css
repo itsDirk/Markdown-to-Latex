@@ -36,3 +36,8 @@ h1 {
     display: flex;
     flex-direction: column;
 }
+
+.radio-buttons {
+    display: flex;
+    flex-direction: column;
+}

@@ -3,6 +3,7 @@ export const config = {
     settings: {
         tableHeadersBold: false,
         outlineRows: false,
-        outlineColumns: true
+        outlineColumns: true,
+        alignTableContent: "center",
     }
 };
