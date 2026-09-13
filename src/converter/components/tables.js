@@ -27,11 +27,12 @@ export function replaceTables(content) {
         }
         if (rows.length > 0 && !config.settings.outlineRows) result += "\n\t\\hline";
 
+        let alignment = config.settings.alignTableContent[0];
         let tableStructure;
         if (config.settings.outlineColumns) {
-            tableStructure = "|c".repeat(headers.length) + "|";
+            tableStructure = `|${alignment}`.repeat(headers.length) + "|";
         } else {
-            tableStructure = "|" + "c".repeat(headers.length) + "|";
+            tableStructure = `|` + alignment.repeat(headers.length) + "|";
         }
 
         result = `\\begin{center}\n\\begin{tabular}` +
