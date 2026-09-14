@@ -7,14 +7,22 @@ export function replaceLinks(content) {
 }
 
 export function replaceHyperLink(content) {
-    // Replace [Display text]{address} with \href{address}{Display text}
+    // Replace [Display text](address) with \href{address}{Display text}
     let regex = new RegExp(/\[.*?]\(.*?\)/g);
     let matches = content.matchAll(regex);
 
     for (const match of matches) {
         let result = match[0].slice(1, -1);
-        let results = result.split("](");
-        result = `\\href{${results[1]}}{${results[0]}}`;
+        let text = result.split("](")[0];
+        let dest = result.split("](")[1];
+
+        // [Display text](#address)
+        if (dest.startsWith("#")) {
+            dest = dest.slice(1);
+            result = `\\hyperref[${dest}]{${text}}`;
+        } else {
+            result = `\\href{${dest}}{${text}}`;
+        }
         content = content.replace(match[0], result);
     }
     return content;

@@ -48,6 +48,9 @@ function findRequiredPackages(content) {
     if (new RegExp(/\\includegraphics/).test(content)) {
         config.packages.push("\\usepackage{graphicx}");
     }
+    if (new RegExp(/\\hyperref/).test(content)) {
+        config.packages.push("\\usepackage{hyperref}");
+    }
 }
 
 function initializeDocument(content) {
