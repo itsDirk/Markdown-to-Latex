@@ -38,20 +38,6 @@ export function convertToLatex(content) {
     return content;
 }
 
-export function replaceRegex(content, regex, sliceStart, sliceEnd,
-                             resultStart, resultEnd, replaceContent = null, replacedContent = null) {
-    let matches = content.matchAll(regex);
-    for (const match of matches) {
-        let result = match[0].slice(sliceStart, sliceEnd);
-        if (replaceContent !== null && replacedContent !== null) {
-            result = result.replaceAll(replaceContent, replacedContent);
-        }
-        result = resultStart + result + resultEnd;
-        content = content.replace(match[0], result);
-    }
-    return content;
-}
-
 function findRequiredPackages(content) {
     if (new RegExp(/\\href{.*?}{.*?}/).test(content)) {
         config.packages.push("\\usepackage[colorlinks=true, urlcolor=blue, linkcolor=red]{hyperref}");
@@ -75,7 +61,6 @@ function initializeDocument(content) {
 
     return output;
 }
-
 
 function preClean(content) {
     content = content.replaceAll("​", "");

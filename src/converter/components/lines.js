@@ -1,4 +1,4 @@
-import {replaceRegex} from "../converter.js";
+import {replaceRegex} from "../utils.js";
 
 export function replaceHorizontalLines(content) {
     // Replace --- with a horizontal line

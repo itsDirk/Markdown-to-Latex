@@ -1,6 +1,8 @@
+import {toKebabCase} from "../utils.js";
+
 export function replaceLinks(content) {
-    content = replaceHyperLink(content);
     content = replaceRefLink(content);
+    content = replaceHyperLink(content);
     return content;
 }
 
@@ -39,8 +41,4 @@ function replaceRefLink(content) {
         content = content.replace(match[0], result);
     }
     return content;
-}
-
-function toKebabCase(content) {
-    return content.toLowerCase().replace(" ", "-");
 }
