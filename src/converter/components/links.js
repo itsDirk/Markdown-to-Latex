@@ -25,8 +25,22 @@ function replaceRefLink(content) {
 
     for (const match of matches) {
         let result = match[0].slice(3, -2);
-        result = `\\hyperref[${result.toLowerCase()}]{${result}}`;
+        let refName = result;
+        let refText = result;
+
+        // [[#Ref 1|Link to ref 1]]
+        if (/^.+?\|.*$/.test(result)) {
+            refName = result.split("|")[0];
+            refText = result.replace(`${refName}|`, "");
+        }
+
+        refName = toKebabCase(refName);
+        result = `\\hyperref[${refName}]{${refText}}`;
         content = content.replace(match[0], result);
     }
     return content;
+}
+
+function toKebabCase(content) {
+    return content.toLowerCase().replace(" ", "-");
 }
