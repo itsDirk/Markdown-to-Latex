@@ -4,7 +4,7 @@ import {replaceLists} from "./components/lists.js";
 import {removeCodeBlocks, restoreCodeBlocks} from "./components/codeblocks.js";
 import {replaceSections} from "./components/sections.js";
 import {replaceTextStyling} from "./components/styling.js";
-import {replaceHyperLink} from "./components/links.js";
+import {replaceLinks} from "./components/links.js";
 import {replaceImages} from "./components/images.js";
 import {replaceHorizontalLines} from "./components/lines.js";
 import {replaceTables} from "./components/tables.js";
@@ -23,7 +23,7 @@ export function convertToLatex(content) {
     ({content, mathLines, mathBlocks} = removeMathBlocks(content));
 
     content = replaceImages(content);
-    content = replaceHyperLink(content);
+    content = replaceLinks(content);
     content = replaceHorizontalLines(content);
     content = replaceLists(content);
     content = replaceTextStyling(content);
