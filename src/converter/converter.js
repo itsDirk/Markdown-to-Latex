@@ -40,7 +40,7 @@ export function convertToLatex(content) {
 
 function findRequiredPackages(content) {
     if (new RegExp(/\\href{.*?}{.*?}/).test(content)) {
-        config.packages.push("\\usepackage[colorlinks=true, urlcolor=blue, linkcolor=red]{hyperref}");
+        config.packages.push("\\usepackage[colorlinks=true, urlcolor=blue, linkcolor=blue]{hyperref}");
     }
     if (new RegExp(/\$.*?\$/).test(content)) {
         config.packages.push("\\usepackage{amsmath}");

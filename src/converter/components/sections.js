@@ -22,7 +22,7 @@ export function replaceSection(content, regex, sliceStart, latexCommand) {
         let result = match[0].slice(sliceStart, 999);
         result = result.replaceAll(/\n/g, "");
         let label = toKebabCase(result);
-        result = `${latexCommand}{${result}}\\label{${label}}\n`;
+        result = `${latexCommand}{${result}} \\label{${label}}\n`;
         content = content.replace(match[0], result);
     }
     return content;

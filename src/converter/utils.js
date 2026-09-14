@@ -13,5 +13,5 @@ export function replaceRegex(content, regex, sliceStart, sliceEnd,
 }
 
 export function toKebabCase(content) {
-    return content.toLowerCase().replace(" ", "-");
+    return content.toLowerCase().replaceAll(" ", "-");
 }
