@@ -4,6 +4,8 @@ import {config} from "../converter/config.js";
 const textAreas = Array.from(document.querySelectorAll("textarea"));
 const copyButton = document.getElementById("copy-button");
 const convertButton = document.getElementById("convert-button");
+const uploadButton = document.getElementById("upload-button");
+const downloadButton = document.getElementById("download-button");
 const inputField = textAreas[0];
 const outputField = textAreas[1];
 
@@ -46,5 +48,14 @@ convertButton.addEventListener("click", () => {
 copyButton.addEventListener("click", async () => {
     await navigator.clipboard.writeText(outputField.value);
 });
+
+downloadButton.addEventListener("click", async () => {
+    let content = outputField.value;
+    let tempElement = document.createElement('a');
+    tempElement.setAttribute("href", `data:text/plain;charset=utf-8,${encodeURIComponent(content)}`);
+    tempElement.setAttribute("download", "document.tex");
+    document.body.appendChild(tempElement);
+    tempElement.click();
+})
 
 syncTextareaHeights();
