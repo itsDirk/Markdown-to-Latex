@@ -66,11 +66,17 @@
 </div>
 <div class="io-container">
     <div class="input-output-field">
+        <div class="io-button-container">
+            <input type="file" id="upload-button" accept=".md, .markdown" class="io-button">
+        </div>
         <textarea placeholder="Paste Markdown here..." class="io-textarea"></textarea>
     </div>
     <button type="button" id="convert-button">Convert</button>
     <div class="input-output-field">
-        <button type="button" id="copy-button" class="copy-button">Copy</button>
+        <div class="io-button-container">
+            <button type="button" id="copy-button" class="io-button">Copy</button>
+            <button type="button" id="download-button" class="io-button">Download</button>
+        </div>
         <textarea placeholder="LaTeX appears here..." class="io-textarea"></textarea>
     </div>
 </div>
