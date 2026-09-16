@@ -5,6 +5,7 @@ export const config = {
         outlineRows: false,
         outlineColumns: true,
         repeatHeaders: false,
+        alignTable: "flushleft",
         alignTableContent: "center",
     }
 };

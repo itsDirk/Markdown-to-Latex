@@ -39,3 +39,12 @@ Voluptatem esse laborum doloremque adipisci non.
 
 ### Scaled empty alt text + empty caption
 ![623](images/image1.png "")
+
+### Many subsequent images
+![Alt text](images/image1.png "The actual caption")
+
+![Alt text](images/image2.png "The actual caption")
+
+![Alt text](images/image3.png "The actual caption")
+
+![Alt text](images/image4.png "The actual caption")

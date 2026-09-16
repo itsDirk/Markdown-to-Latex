@@ -52,15 +52,14 @@ function replaceImageCaption(content) {
             altText = altText.replace(size, "");
             scale = (size / 700).toFixed(3);
         }
-
-        let result = `\\begin{figure}\n\t\\centering` +
-            `\n\t\\includegraphics[width=${scale}\\linewidth]{${path}}`;
+        let result = `\\begin{figure}\n\t\\centering\n` +
+            `\t\\includegraphics[width=${scale}\\linewidth]{${path}}\n`;
         if (caption) {
-            result += `\n\t\\caption{${caption}}`;
+            result += `\t\\caption{${caption}}\n`;
         } else if (altText) {
-            result += `\n\t\\caption{${altText}}`;
+            result += `\t\\caption{${altText}}\n`;
         }
-        result += `\n\\end{figure}`;
+        result += `\\end{figure}`;
 
         content = content.replace(match[0], result);
     }
