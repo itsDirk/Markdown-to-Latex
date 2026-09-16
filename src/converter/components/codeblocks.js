@@ -12,7 +12,9 @@ export function removeCodeBlocks(content) {
     let codeBlocks = [];
     content = content.replace(/```.*?```/gs, match => {
         const id = codeBlocks.length;
-        const code = match.slice(3, -3);
+        let code = match.slice(3, -3);
+        const language = code.split("\n")[0];
+        code = code.replace(language, "");
         codeBlocks.push(`\\begin{verbatim}${code}\\end{verbatim}`);
         return `=CODE=BLOCK=${id}=`;
     });

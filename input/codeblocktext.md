@@ -7,13 +7,13 @@ hello world
 consequatur aperiam deserunt.*
 ```
 
-```
+```js
 Praesentium omnis `impedit` dolorem alias.
 Esse qu`od *dolores* **quidem error corrupti tempora quae.
 Natus ut delectus vo*luptatib*us ist`e tenetur.
 ```
 
-```
+```c#
 ## Vero qui quasi est *quaerat* dicta placeat quos possimus.
 ```
 
