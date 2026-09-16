@@ -12,11 +12,12 @@ export function replaceTables(content) {
         headers = headers.map((header) => header.trim()); // Remove leading and trailing spaces
         // "<br>" are replaced with "\\". If a cell contains these, wrap them in \shortstack{} to format them properly
         headers = headers.map((header) => header.includes("\\\\") ? `\\shortstack{${header}}` : header);
+        // If headers are configured to be in boldface, wrap them in \textbf{}
         if (config.settings.tableHeadersBold) headers = headers.map((header) => `\\textbf{${header}}`);
 
         let rows = table.split("\n");
         rows.shift(); // Remove first
-
+        // TODO Move linebreaks to be at the end of each statement
         let result = `\t\\hline\n\t${headers.join(" & ")} \\\\\n\t\\hline`;
         for (const row of rows) {
             let cells = row.slice(1, -1).split(" | ");
@@ -26,6 +27,7 @@ export function replaceTables(content) {
             if (config.settings.outlineRows) result += `\n\t\\hline`;
         }
         if (rows.length > 0 && !config.settings.outlineRows) result += "\n\t\\hline";
+        if (rows.length > 0 && config.settings.repeatHeaders) result += `\n\t${headers.join(" & ")} \\\\\n\t\\hline`;
 
         let alignment = config.settings.alignTableContent[0];
         let tableStructure;

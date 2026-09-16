@@ -12,7 +12,8 @@ The web page contains two text fields. Paste your Markdown source code in the le
 The following options are exposed that are applied to the next conversion:
 - **Headers in boldface** writes each element in the top row of a table in **boldface**, much like how tables in Obsidian are rendered.
 - **Outline every row** adds a horizontal bar between each row of a table.
-- **Outline every column** add a vertical bar between each column of a table.
+- **Outline every column** adds a vertical bar between each column of a table.
+- **Repeat headers at bottom of table** copies the headers of a table and adds them to the bottom.
 - **Align table content** changes how the content inside each cell in a table is aligned: center/left/right.
 ### Local Installation
 When running locally, adjust the path variables in [app.js](/src/app.js) to select the input (`.md`) and output (`.tex`) file. If no output `.tex` file is present, it is created, otherwise its contents will be overwritten. Run the app using `npm run start`.

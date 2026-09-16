@@ -4,6 +4,7 @@ export const config = {
         tableHeadersBold: false,
         outlineRows: false,
         outlineColumns: true,
+        repeatHeaders: false,
         alignTableContent: "center",
     }
 };
