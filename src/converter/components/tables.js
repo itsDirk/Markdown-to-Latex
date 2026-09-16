@@ -17,17 +17,16 @@ export function replaceTables(content) {
 
         let rows = table.split("\n");
         rows.shift(); // Remove first
-        // TODO Move linebreaks to be at the end of each statement
-        let result = `\t\\hline\n\t${headers.join(" & ")} \\\\\n\t\\hline`;
+        let result = `\t\\hline\n\t${headers.join(" & ")} \\\\\n\t\\hline\n`;
         for (const row of rows) {
             let cells = row.slice(1, -1).split(" | ");
             cells = cells.map((cell) => cell.trim());
             cells = cells.join(" & ");
-            result += `\n\t${cells} \\\\`;
-            if (config.settings.outlineRows) result += `\n\t\\hline`;
+            result += `\t${cells} \\\\\n`;
+            if (config.settings.outlineRows) result += `\t\\hline\n`;
         }
-        if (rows.length > 0 && !config.settings.outlineRows) result += "\n\t\\hline";
-        if (rows.length > 0 && config.settings.repeatHeaders) result += `\n\t${headers.join(" & ")} \\\\\n\t\\hline`;
+        if (rows.length > 0 && !config.settings.outlineRows) result += "\t\\hline\n";
+        if (rows.length > 0 && config.settings.repeatHeaders) result += `\t${headers.join(" & ")} \\\\\n\t\\hline\n`;
 
         let alignment = config.settings.alignTableContent[0];
         let tableStructure;
@@ -38,9 +37,8 @@ export function replaceTables(content) {
         }
 
         result = `\\begin{center}\n\\begin{tabular}` +
-            `{${tableStructure}}\n` +
-            result +
-            `\n\\end{tabular}\n\\end{center}`;
+            `{${tableStructure}}\n${result}` +
+            `\\end{tabular}\n\\end{center}`;
         content = content.replace(match[0], result);
     }
 
