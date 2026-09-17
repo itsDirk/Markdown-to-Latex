@@ -49,6 +49,13 @@ copyButton.addEventListener("click", async () => {
     await navigator.clipboard.writeText(outputField.value);
 });
 
+uploadButton.addEventListener("change", async () => {
+    const file = uploadButton.files?.[0];
+    if (!file) return;
+    inputField.value = await file.text();
+    syncTextareaHeights();
+});
+
 downloadButton.addEventListener("click", async () => {
     let content = outputField.value;
     let tempElement = document.createElement('a');
