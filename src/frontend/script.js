@@ -25,6 +25,11 @@ textAreas.forEach((textarea) => {
     textarea.addEventListener("input", syncTextareaHeights);
 });
 
+outputField.addEventListener("change", async () => {
+    downloadButton.disabled = !outputField.value;
+    copyButton.disabled = !outputField.value;
+});
+
 convertButton.addEventListener("click", () => {
     const tableHeadersBold = document.getElementById("table1")?.checked || false;
     const outlineRows = document.getElementById("table2")?.checked || false;
@@ -42,6 +47,8 @@ convertButton.addEventListener("click", () => {
     config.settings.alignTableContent = alignTableContent;
 
     outputField.value = convertToLatex(inputField.value);
+    downloadButton.disabled = !outputField.value;
+    copyButton.disabled = !outputField.value;
     syncTextareaHeights();
 });
 
@@ -63,6 +70,6 @@ downloadButton.addEventListener("click", async () => {
     tempElement.setAttribute("download", "document.tex");
     document.body.appendChild(tempElement);
     tempElement.click();
-})
+});
 
 syncTextareaHeights();
