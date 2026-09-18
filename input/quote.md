@@ -1,5 +1,3 @@
-# Quotes
-## Regular quotes
 > Hello world
 
 Hello,
@@ -21,10 +19,10 @@ World!
 
 ## Nested styling
 > Maiores *repellat* consequatur aperiam deserunt.
-> Praesentium **omnis** impedit dolorem alias. 
+> Praesentium **omnis** impedit dolorem alias.
 > Esse ~~quod~~ dolores quidem error corrupti tempora quae.
-> ### Natus ut delectus voluptatibus iste tenetur.
-> ##### Vero qui quasi est quaerat dicta placeat quos possimus.
+>   Natus ut delectus voluptatibus iste tenetur.
+>   Vero qui quasi est quaerat dicta placeat quos possimus.
 > Voluptatem %%esse%% laborum doloremque adipisci non.
 
 ## Nested quotes
@@ -34,24 +32,41 @@ World!
 > World!
 > > Hello,
 > > World!
-> > >Hello,
+> > > Hello,
+> > > World!
+> > > > Hello,
+> > > > World!
+
+Hello,
+World!
+
+> Hello,
+> World!
+
+> > Hello,
+> > World!
+
+> > > Hello,
 > > > World!
 
+> > > > Hello,
+> > > > World!
+
 > Maiores repellat consequatur aperiam deserunt.
-> Praesentium omnis impedit dolorem alias. 
+> Praesentium omnis impedit dolorem alias.
 > > Esse quod dolores quidem error corrupti tempora quae.
 > >Natus ut delectus voluptatibus iste tenetur.
 > > >Vero qui quasi est quaerat dicta placeat quos possimus.
 > Voluptatem esse laborum doloremque adipisci non.
 > >Maiores repellat consequatur aperiam deserunt.
-> Praesentium omnis impedit dolorem alias. 
+> Praesentium omnis impedit dolorem alias.
 > > > Esse quod dolores quidem error corrupti tempora quae.
 > >Natus ut delectus voluptatibus iste tenetur.
 > Vero qui quasi est quaerat dicta placeat quos possimus.
 > Voluptatem esse laborum doloremque adipisci non.
 ## Non-indented quotes
 >Maiores repellat consequatur aperiam deserunt.
-Praesentium omnis impedit dolorem alias. 
+Praesentium omnis impedit dolorem alias.
 Esse quod dolores quidem error corrupti tempora quae.
 Natus ut delectus voluptatibus iste tenetur.
 Vero qui quasi est quaerat dicta placeat quos possimus.
@@ -59,16 +74,28 @@ Voluptatem esse laborum doloremque adipisci non.
 
 ## Edge cases
 Text > Maiores repellat consequatur aperiam deserunt.
-Text>Praesentium omnis impedit dolorem alias. 
+Text>Praesentium omnis impedit dolorem alias.
 >
 >Esse quod dolores quidem error corrupti tempora quae.
-        >Natus ut delectus voluptatibus iste tenetur.
-			>Vero qui quasi est quaerat dicta placeat quos possimus.
+>Natus ut delectus voluptatibus iste tenetur.
+>Vero qui quasi est quaerat dicta placeat quos possimus.
 Voluptatem esse laborum doloremque adipisci non.
 
 Maiores > repellat consequatur aperiam deserunt.
-Praesentium < omnis impedit dolorem alias. 
+Praesentium < omnis impedit dolorem alias.
 Esse quod dolores> quidem < error corrupti tempora quae.
 Natus ut delectus voluptatibus iste tenetur.
 Vero qui quasi est quaerat dicta placeat quos possimus.
 Voluptatem esse laborum doloremque adipisci non.
+
+> Hello,
+World
+Hello,
+World
+
+
+
+> World!
+> World!
+> > > Hello,
+> > > World!

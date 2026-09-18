@@ -1,22 +1,24 @@
-export function replaceQuotes(content) {
-    let matches = content.matchAll(/\n[\t ]*(>.*?\n)+/g);
+export function replaceQuotes(content, dept = 0) {
+    let matches = content.matchAll(/(?<=\n|^) {0,3}>.*?\n([^\n#]+?(\n|$))*/g);
 
     for (const match of matches) {
-        let result = match[0].slice(1,-1);
+        let result = match[0];
         let lines = result.split("\n");
 
         lines = lines.map((line) => {
             line = line.trimStart();
-            line = line.slice(1);
+            line = line.replace(">", "");
             line = line.trimStart();
             return line;
         });
 
+        result = lines.join(`\n`);
 
-        result = lines.join("\n\t");
+        if (result.endsWith("\n")) result = result.slice(0, -1);
+
         result = `\n\\begin{quote}\n` +
-            `\t${result}\n` +
-            `\\end{quote}\n`;
+            `${result}\n` +
+            `\\end{quote}`;
         content = content.replace(match[0], result);
     }
     return content;
