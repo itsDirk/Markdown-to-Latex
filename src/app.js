@@ -2,10 +2,11 @@ import {readFile} from "./converter/fileio/fileReader.js";
 import {writeFile} from "./converter/fileio/fileWriter.js";
 import {convertToLatex} from "./converter/converter.js";
 
-const inputPath = "./input/horizontalline.md";
-const outputPath = "./output/horizontalline.tex";
+const inputPath = "./input/quote.md";
+const outputPath = "./output/quote.tex";
 
 let content = readFile(inputPath);
-content = convertToLatex(content);
-writeFile(outputPath, content);
-console.log(`Done!\nWrote output to ${outputPath}`);
+if (content) content = convertToLatex(content);
+if (content) writeFile(outputPath, content);
+console.log(`Done!`);
+if (content) console.log(`Wrote output to ${outputPath}!`);
