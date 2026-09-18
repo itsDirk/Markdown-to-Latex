@@ -9,6 +9,7 @@ import {replaceImages} from "./components/images.js";
 import {replaceHorizontalLines} from "./components/lines.js";
 import {replaceTables} from "./components/tables.js";
 import {removeMathBlocks, restoreMathBlocks} from "./components/mathblocks.js";
+import {replaceQuotes} from "./components/quotes.js";
 
 export function convertToLatex(content) {
     if (!content) {
@@ -29,6 +30,7 @@ export function convertToLatex(content) {
     content = replaceTextStyling(content);
     content = replaceSections(content);
     content = replaceTables(content);
+    content = replaceQuotes(content);
     content = replaceComments(content);
 
     content = postClean(content);

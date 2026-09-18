@@ -8,8 +8,7 @@ export function replaceLinks(content) {
 
 export function replaceHyperLink(content) {
     // Replace [Display text](address) with \href{address}{Display text}
-    let regex = new RegExp(/\[.*?]\(.*?\)/g);
-    let matches = content.matchAll(regex);
+    let matches = content.matchAll(/\[.*?]\(.*?\)/g);
 
     for (const match of matches) {
         let result = match[0].slice(1, -1);
