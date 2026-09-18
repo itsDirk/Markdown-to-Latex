@@ -1,4 +1,4 @@
-export function replaceQuotes(content, dept = 0) {
+export function replaceQuotes(content) {
     let matches = content.matchAll(/(?<=\n|^) {0,3}>.*?\n([^\n#]+?(\n|$))*/g);
 
     for (const match of matches) {
@@ -12,11 +12,13 @@ export function replaceQuotes(content, dept = 0) {
             return line;
         });
 
-        result = lines.join(`\n`);
-
+        result = lines.join("\n");
         if (result.endsWith("\n")) result = result.slice(0, -1);
 
-        result = `\n\\begin{quote}\n` +
+        result = replaceQuotes(result);
+        result = "\t" + result.split("\n").join("\n\t");
+
+        result = `\\begin{quote}\n` +
             `${result}\n` +
             `\\end{quote}`;
         content = content.replace(match[0], result);
