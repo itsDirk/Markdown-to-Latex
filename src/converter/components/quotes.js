@@ -5,12 +5,7 @@ export function replaceQuotes(content) {
         let result = match[0];
         let lines = result.split("\n");
 
-        lines = lines.map((line) => {
-            line = line.trimStart();
-            line = line.replace(">", "");
-            line = line.trimStart();
-            return line;
-        });
+        lines = lines.map((line) => line.trimStart().replace(">", "").trimStart());
 
         result = lines.join("\n");
         if (result.endsWith("\n")) result = result.slice(0, -1);

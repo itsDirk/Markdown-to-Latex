@@ -9,9 +9,11 @@ export function replaceLists(content) {
 function replaceList(isOrdered, content, dept = 0) {
     let matches;
     if (isOrdered) {
+        // Ordered list regex
         matches = content.matchAll(/(\n(\t| {2})*(\d+)\. .+)+/g);
     } else {
-        matches = content.matchAll(/(\n(\t| {2})*[-*] .+)+/g)
+        // Unordered list regex
+        matches = content.matchAll(/(\n(\t| {2})*[-*+] .+)+/g)
     }
 
     for (const match of matches) {
@@ -32,7 +34,7 @@ function replaceList(isOrdered, content, dept = 0) {
                 if (isOrdered) {
                     row = row.replace(/(\d+)\. /, `\n${"\t".repeat(dept + 1)}\\item `);
                 } else {
-                    row = row.replace(/[-*] /, `\n${"\t".repeat(dept + 1)}\\item `);
+                    row = row.replace(/[-*+] /, `\n${"\t".repeat(dept + 1)}\\item `);
                 }
                 result += row;
             }
