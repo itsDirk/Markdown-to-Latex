@@ -31,4 +31,24 @@ The end?
 	1. Third
 	2. Fourth
 
-The end
+## Spaces after marker
+Example 1
+1. First
+2.  Second
+3.   Third
+4.    Fourth
+5.     Fifth
+
+Example 2
+1. First
+ 2. Second
+  3. Third
+   4. Fourth 
+    5. Fifth
+
+Example 3
+1. First
+ 2.  Second
+  3.   Third
+   4.    Fourth
+    5.     Fifth

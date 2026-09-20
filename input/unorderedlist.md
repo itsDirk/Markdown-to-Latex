@@ -1,4 +1,4 @@
-
+# Unordered Lists
 ## Grocery store shopping list
 To take from the store:
 - Eggs
@@ -54,3 +54,25 @@ The end?
 - Second
 	* Third
 	+ Fourth
+
+## Spaces after marker
+Example 1
+- First
+*  Second
++   Third
+-    Fourth
+*     Fifth
+
+Example 2
+- First
+ * Second
+  + Third
+   - Fourth
+    * Fifth
+
+Example 3
+- First
+ *  Second
+  +   Third
+   -    Fourth
+    *     Fifth
