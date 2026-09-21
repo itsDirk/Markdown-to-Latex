@@ -53,6 +53,10 @@ function findRequiredPackages(content) {
     if (new RegExp(/\\hyperref/).test(content)) {
         config.packages.push("\\usepackage{hyperref}");
     }
+    // Note that this package does NOT come with the standard TeX studio distribution
+    if (new RegExp(/\\hl/).test(content)) {
+        config.packages.push("\\usepackage{soul}\n\\usepackage{color}");
+    }
 }
 
 function initializeDocument(content) {
