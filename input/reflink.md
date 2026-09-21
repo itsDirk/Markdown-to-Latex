@@ -26,4 +26,10 @@ Obsidian however, doesn't. It uses a different syntax to link to headers. There 
 [[#Header 5|Link to header 5]]
 [[#Header 6|Link to header 6]]
 
+## Duplicate header
 
+## Duplicate header
+
+[[#Duplicate header]]
+
+[[#Duplicate header]]

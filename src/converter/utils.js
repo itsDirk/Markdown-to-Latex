@@ -12,6 +12,25 @@ export function replaceRegex(content, regex, sliceStart, sliceEnd,
     return content;
 }
 
+let labels = new Set();
+
+export function generateLabel(title) {
+    title = toKebabCase(title);
+    let newLabel = title;
+    let id = 1;
+    while (labels.has(newLabel)) {
+        newLabel = `${title}-${id}`;
+        id++;
+    }
+    labels.add(newLabel);
+
+    return newLabel;
+}
+
 export function toKebabCase(content) {
-    return content.toLowerCase().replaceAll(" ", "-");
+    content = content.toLowerCase();
+    content = content.replaceAll(/[:+]/g, "");
+    content = content.replaceAll(/[ _]/g, "-");
+    content = content.replaceAll(/-{2,}/g, "-");
+    return content;
 }

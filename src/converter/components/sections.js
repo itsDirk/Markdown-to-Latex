@@ -1,4 +1,4 @@
-import {toKebabCase} from "../utils.js";
+import {generateLabel} from "../utils.js";
 
 export function replaceSections(content) {
     // Replace ###### Title with \textbf{Title}
@@ -21,7 +21,7 @@ export function replaceSection(content, regex, sliceStart, latexCommand) {
     for (const match of matches) {
         let result = match[0].slice(sliceStart, 999);
         result = result.replaceAll(/\n/g, "");
-        let label = toKebabCase(result);
+        let label = generateLabel(result);
         result = `${latexCommand}{${result}} \\label{${label}}\n`;
         content = content.replace(match[0], result);
     }
