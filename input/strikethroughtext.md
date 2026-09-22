@@ -6,13 +6,13 @@ Vero qui quasi ~~est quaerat dicta placeat~~ quos possimus.
 Voluptatem esse laborum dolo~~rem~~que adipisci non.
 
 ## ~~test~~test
-sbsdbb
+Hello world
 
 ## Edge cases  
 
-~~Bold text~~  
-~~ Space bold text~~  
-~~Bold text space ~~  
-~~ Space bold text space ~~  
-~~Bold text
-~~ Space bold text
+~~Strikethrough text~~  
+~~ Space strikethrough text~~  
+~~Strikethrough text space ~~  
+~~ Space strikethrough text space ~~  
+~~Strikethrough text
+~~ Space strikethrough text

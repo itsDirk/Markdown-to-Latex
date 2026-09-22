@@ -9,5 +9,4 @@ const outputPath = `./output/${fileName}.tex`;
 let content = readFile(inputPath);
 if (content) content = convertToLatex(content);
 if (content) writeFile(outputPath, content);
-console.log(`Done!`);
 if (content) console.log(`Wrote output to ${fileName}.tex!`);
