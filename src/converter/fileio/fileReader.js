@@ -1,13 +1,14 @@
 import fs from "fs";
+import {consoleError} from "../logger.js";
 
 export function readFile(path) {
     if (!path) {
-        console.error("No file path specified");
+        consoleError("No file path specified");
         return;
     }
 
     if (!fs.existsSync(path)) {
-        console.error(`File at "${path}" not found`);
+        consoleError(`File at "${path}" not found`);
         return;
     }
 
