@@ -57,5 +57,31 @@ Line 2
 Line 3
 $$
 
+
+$$
+a/b=c
+%1+2=3
+$$
+
 ---
 Voluptatem esse laborum doloremque adipisci non.%%
+
+
+
+$$
+Math block
+Line 1
+Line 2
+Line 3
+$$
+
+
+$$
+a/b=c
+%%1+2=3%%
+$$
+
+```
+helloWorld("print");
+<!-- helloWorld(); -->
+```

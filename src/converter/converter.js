@@ -31,11 +31,12 @@ export function convertToLatex(content) {
     content = replaceSections(content);
     content = replaceTables(content);
     content = replaceQuotes(content);
-    content = replaceComments(content);
 
     content = postClean(content);
     content = restoreMathBlocks(content, mathLines, mathBlocks);
+    content = replaceComments(content);
     content = restoreCodeBlocks(content, codeLines, codeBlocks);
+
     content = initializeDocument(content);
     return content;
 }
