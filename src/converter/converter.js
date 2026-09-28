@@ -35,6 +35,7 @@ export function convertToLatex(content) {
     content = postClean(content);
     content = restoreMathBlocks(content, mathLines, mathBlocks);
     content = replaceComments(content);
+    findRequiredPackages(content);
     content = restoreCodeBlocks(content, codeLines, codeBlocks);
 
     content = initializeDocument(content);
@@ -64,14 +65,11 @@ function findRequiredPackages(content) {
 }
 
 function initializeDocument(content) {
-    findRequiredPackages(content);
-
     let output = `\\documentclass[a4paper]{article}\n`;
     for (const index in config.packages) {
         output += config.packages[index] + "\n";
     }
     output += `\\begin{document}\n${content}\n\\end{document}`;
-
     return output;
 }
 
