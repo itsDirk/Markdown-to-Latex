@@ -20,8 +20,8 @@ function replaceImage(content) {
             path = path.split("|")[0];
             scale = (size / 700).toFixed(3);
         }
-        const float = config.settings.floatImage;
-        const align = config.settings.alignImage;
+        const float = config.image.float;
+        const align = config.image.align;
 
         let result = `\\begin{figure}[${float}]\n` +
             `\t\\${align}\n` +
@@ -59,8 +59,8 @@ function replaceImageCaption(content) {
             altText = altText.replace(size, "");
             scale = (size / 700).toFixed(3);
         }
-        const float = config.settings.floatImage;
-        const align = config.settings.alignImage;
+        const float = config.image.float;
+        const align = config.image.align;
 
         let result = `\\begin{figure}[${float}]\n` +
             `\t\\${align}\n` +

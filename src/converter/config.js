@@ -1,13 +1,15 @@
 export const config = {
     packages: [],
-    settings: {
-        tableHeadersBold: false,
+    table: {
+        headersBold: false,
         outlineRows: false,
-        outlineColumns: true,
+        outlineColumns: false,
         repeatHeaders: false,
-        alignTable: "flushleft",
-        alignTableContent: "center",
-        floatImage: "h",
-        alignImage: "center",
-    }
+        align: "flushleft",
+        alignContent: "center",
+    },
+    image: {
+        float: "h",
+        align: "center",
+    },
 };

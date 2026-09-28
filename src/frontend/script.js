@@ -41,14 +41,14 @@ convertButton.addEventListener("click", () => {
     const alignImage = document.querySelector('input[name="image-align"]:checked').value;
 
     config.packages = [];
-    config.settings.tableHeadersBold = tableHeadersBold;
-    config.settings.outlineRows = outlineRows;
-    config.settings.outlineColumns = outlineColumns;
-    config.settings.repeatHeaders = repeatHeaders;
-    config.settings.alignTable = alignTable;
-    config.settings.alignTableContent = alignTableContent;
-    config.settings.floatImage = floatImage;
-    config.settings.alignImage = alignImage;
+    config.table.headersBold = tableHeadersBold;
+    config.table.outlineRows = outlineRows;
+    config.table.outlineColumns = outlineColumns;
+    config.table.repeatHeaders = repeatHeaders;
+    config.table.align = alignTable;
+    config.table.alignContent = alignTableContent;
+    config.image.float = floatImage;
+    config.image.align = alignImage;
 
     outputField.value = convertToLatex(inputField.value);
     downloadButton.disabled = !outputField.value;

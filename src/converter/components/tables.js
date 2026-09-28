@@ -13,7 +13,7 @@ export function replaceTables(content) {
         // "<br>" are replaced with "\\". If a cell contains these, wrap them in \shortstack{} to format them properly
         headers = headers.map((header) => header.includes("\\\\") ? `\\shortstack{${header}}` : header);
         // If headers are configured to be in boldface, wrap them in \textbf{}
-        if (config.settings.tableHeadersBold) headers = headers.map((header) => `\\textbf{${header}}`);
+        if (config.table.headersBold) headers = headers.map((header) => `\\textbf{${header}}`);
 
         let rows = table.split("\n");
         rows.shift(); // Remove first
@@ -23,15 +23,15 @@ export function replaceTables(content) {
             cells = cells.map((cell) => cell.trim());
             cells = cells.join(" & ");
             result += `\t${cells} \\\\\n`;
-            if (config.settings.outlineRows) result += `\t\\hline\n`;
+            if (config.table.outlineRows) result += `\t\\hline\n`;
         }
-        if (rows.length > 0 && !config.settings.outlineRows) result += "\t\\hline\n";
-        if (rows.length > 0 && config.settings.repeatHeaders) result += `\t${headers.join(" & ")} \\\\\n\t\\hline\n`;
+        if (rows.length > 0 && !config.table.outlineRows) result += "\t\\hline\n";
+        if (rows.length > 0 && config.table.repeatHeaders) result += `\t${headers.join(" & ")} \\\\\n\t\\hline\n`;
 
-        let tableAlignment = config.settings.alignTable;
-        let contentAlignment = config.settings.alignTableContent[0];
+        let tableAlignment = config.table.align;
+        let contentAlignment = config.table.alignContent[0];
         let tableStructure;
-        if (config.settings.outlineColumns) {
+        if (config.table.outlineColumns) {
             tableStructure = `|${contentAlignment}`.repeat(headers.length) + "|";
         } else {
             tableStructure = `|` + contentAlignment.repeat(headers.length) + "|";
