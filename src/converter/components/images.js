@@ -1,4 +1,5 @@
 import {config} from "../config.js";
+import {generateLabel} from "../utils.js";
 
 export function replaceImages(content) {
     // ![[image.png]]
@@ -9,6 +10,7 @@ export function replaceImages(content) {
 }
 
 function replaceImage(content) {
+    // ![[image.png]]
     const matches = content.matchAll(/!\[\[.+?]]/g);
 
     for (const match of matches) {
@@ -22,11 +24,13 @@ function replaceImage(content) {
         }
         const float = config.image.float;
         const align = config.image.align;
+        const label = getLabelFromPath(path);
 
         let result = `\\begin{figure}[${float}]\n` +
             `\t\\${align}\n` +
             `\t\\includegraphics[width=${scale}\\linewidth]\n` +
             `\t{${path}}\n` +
+            `\t\\label{${label}}\n` +
             `\\end{figure}`
         content = content.replace(match[0], result);
     }
@@ -34,6 +38,7 @@ function replaceImage(content) {
 }
 
 function replaceImageCaption(content) {
+    // ![Alt Text](image.png "Image caption")
     const matches = content.matchAll(/!\[.*]\(.+?\)/g);
 
     for (const match of matches) {
@@ -61,11 +66,14 @@ function replaceImageCaption(content) {
         }
         const float = config.image.float;
         const align = config.image.align;
+        const label = getLabelFromPath(path);
 
         let result = `\\begin{figure}[${float}]\n` +
             `\t\\${align}\n` +
             `\t\\includegraphics[width=${scale}\\linewidth]\n` +
-            `\t{${path}}\n`;
+            `\t{${path}}\n` +
+            `\t\\label{${label}}\n`;
+
         if (caption) {
             result += `\t\\caption{${caption}}\n`;
         } else if (altText) {
@@ -76,4 +84,12 @@ function replaceImageCaption(content) {
         content = content.replace(match[0], result);
     }
     return content;
+}
+
+function getLabelFromPath(path) {
+    let dirs = path.split("/");
+    let label = dirs[dirs.length - 1];
+    let extensions = label.split(".");
+    label = label.replace(extensions[extensions.length - 1], "");
+    return generateLabel(label);
 }
