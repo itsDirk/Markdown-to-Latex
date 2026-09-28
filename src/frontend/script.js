@@ -37,6 +37,7 @@ convertButton.addEventListener("click", () => {
     const repeatHeaders = document.getElementById("table4")?.checked || false;
     const alignTable = document.querySelector('input[name="table-align"]:checked').value;
     const alignTableContent = document.querySelector('input[name="table-content-align"]:checked').value;
+    const floatImage = document.querySelector('input[name="image-float"]:checked').value;
 
     config.packages = [];
     config.settings.tableHeadersBold = tableHeadersBold;
@@ -45,6 +46,7 @@ convertButton.addEventListener("click", () => {
     config.settings.repeatHeaders = repeatHeaders;
     config.settings.alignTable = alignTable;
     config.settings.alignTableContent = alignTableContent;
+    config.settings.floatImage = floatImage;
 
     outputField.value = convertToLatex(inputField.value);
     downloadButton.disabled = !outputField.value;

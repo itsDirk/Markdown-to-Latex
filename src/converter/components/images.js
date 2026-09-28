@@ -1,8 +1,11 @@
+import {config} from "../config.js";
+
 export function replaceImages(content) {
     // ![[image.png]]
     content = replaceImage(content);
     // ![Alt Text](image.png "Image caption")
     content = replaceImageCaption(content);
+    console.log(config.settings.alignImage);
     return content;
 }
 
@@ -18,9 +21,10 @@ function replaceImage(content) {
             path = path.split("|")[0];
             scale = (size / 700).toFixed(3);
         }
-        let result = `\\begin{figure}\n\t\\centering` +
-            `\n\t\\includegraphics[width=${scale}\\linewidth]{${path}}` +
-            `\n\\end{figure}`
+        const float = config.settings.floatImage;
+        let result = `\\begin{figure}[${float}]\n` +
+            `\t\\includegraphics[width=${scale}\\linewidth]{${path}}\n` +
+            `\\end{figure}`
         content = content.replace(match[0], result);
     }
     return content;
@@ -52,7 +56,8 @@ function replaceImageCaption(content) {
             altText = altText.replace(size, "");
             scale = (size / 700).toFixed(3);
         }
-        let result = `\\begin{figure}\n\t\\centering\n` +
+        const float = config.settings.floatImage;
+        let result = `\\begin{figure}[${float}]\n` +
             `\t\\includegraphics[width=${scale}\\linewidth]{${path}}\n`;
         if (caption) {
             result += `\t\\caption{${caption}}\n`;

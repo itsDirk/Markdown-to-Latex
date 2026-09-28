@@ -48,3 +48,6 @@ Voluptatem esse laborum doloremque adipisci non.
 ![Alt text](images/image3.png "The actual caption")
 
 ![Alt text](images/image4.png "The actual caption")
+
+### No relative path
+![[image1.png]]  

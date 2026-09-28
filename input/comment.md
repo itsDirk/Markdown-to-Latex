@@ -7,6 +7,23 @@ Natus ut delectus voluptatibus iste tenetur.
 [//]: # (Vero qui quasi est quaerat dicta placeat quos possimus.)
 Voluptatem esse laborum doloremque adipisci non.
 
+%%
+
+$$
+Math block
+Line 1
+Line 2
+Line 3
+$$
+
+```
+Code block
+Line 1
+Line 2
+Line 3
+```
+
+%%
 
 
 Maiores repellat consequatur aperiam deserunt.

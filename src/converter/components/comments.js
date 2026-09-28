@@ -7,5 +7,5 @@ export function replaceComments(content) {
     content = replaceRegex(content, /<!-- ?.*? ?-->/gs, 4, -3, "%", "", "\n", "\n%");
     // Comments in JetBrains IDE's
     content = replaceRegex(content, /(?<=\n([\t ]*)|%.*)\n\[\/\/]: # \(.*?\)/g, 10, -1, "\n%", "");
-    return content
+    return content;
 }

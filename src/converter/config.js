@@ -7,5 +7,6 @@ export const config = {
         repeatHeaders: false,
         alignTable: "flushleft",
         alignTableContent: "center",
+        floatImage: "h!",
     }
 };
