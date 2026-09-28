@@ -6,7 +6,8 @@ export const config = {
         outlineRows: false,
         outlineColumns: false,
         repeatHeaders: false,
-        align: "flushleft",
+        float: "h",
+        align: "center",
         alignContent: "center",
     },
     image: {

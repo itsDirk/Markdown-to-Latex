@@ -28,18 +28,24 @@ export function replaceTables(content) {
         if (rows.length > 0 && !config.table.outlineRows) result += "\t\\hline\n";
         if (rows.length > 0 && config.table.repeatHeaders) result += `\t${headers.join(" & ")} \\\\\n\t\\hline\n`;
 
-        let tableAlignment = config.table.align;
-        let contentAlignment = config.table.alignContent[0];
+        const alignment = config.table.align;
+        const contentAlignment = config.table.alignContent[0];
+        const float = config.table.float;
+
         let tableStructure;
         if (config.table.outlineColumns) {
             tableStructure = `|${contentAlignment}`.repeat(headers.length) + "|";
         } else {
             tableStructure = `|` + contentAlignment.repeat(headers.length) + "|";
+
         }
 
-        result = `\\begin{${tableAlignment}}\n\\begin{tabular}` +
-            `{${tableStructure}}\n${result}` +
-            `\\end{tabular}\n\\end{${tableAlignment}}`;
+        result = `\\begin{table}[${float}]\n` +
+            `\\${alignment}\n` +
+            `\\begin{tabular}{${tableStructure}}\n` +
+            result +
+            `\\end{tabular}\n` +
+            `\\end{table}`;
         content = content.replace(match[0], result);
     }
 

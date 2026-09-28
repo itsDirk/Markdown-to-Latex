@@ -31,17 +31,42 @@
     </div>
     <div class="settings-sub-container">
         <div class="setting radio-buttons">
+            <span>Position tables</span>
+            <label>
+                <input type="radio" name="table-float" value="h" checked>
+                Approximate location
+            </label>
+            <label>
+                <input type="radio" name="table-float" value="h!">
+                Exact location
+            </label>
+            <label>
+                <input type="radio" name="table-float" value="t">
+                Top of page
+            </label>
+            <label>
+                <input type="radio" name="table-float" value="b">
+                Bottom of page
+            </label>
+            <label>
+                <input type="radio" name="table-float" value="p">
+                Separate page
+            </label>
+        </div>
+    </div>
+    <div class="settings-sub-container">
+        <div class="setting radio-buttons">
             <span>Align tables</span>
             <label>
-                <input type="radio" name="table-align" value="flushleft" checked>
+                <input type="radio" name="table-align" value="raggedright">
                 Left
             </label>
             <label>
-                <input type="radio" name="table-align" value="center">
+                <input type="radio" name="table-align" value="center" checked>
                 Center
             </label>
             <label>
-                <input type="radio" name="table-align" value="flushright">
+                <input type="radio" name="table-align" value="raggedleft">
                 Right
             </label>
         </div>
@@ -65,14 +90,14 @@
     </div>
     <div class="settings-sub-container">
         <div class="setting radio-buttons">
-            <span>Position image</span>
-            <label>
-                <input type="radio" name="image-float" value="h!">
-                Exact location
-            </label>
+            <span>Position images</span>
             <label>
                 <input type="radio" name="image-float" value="h" checked>
                 Approximate location
+            </label>
+            <label>
+                <input type="radio" name="image-float" value="h!">
+                Exact location
             </label>
             <label>
                 <input type="radio" name="image-float" value="t">
@@ -90,7 +115,7 @@
     </div>
     <div class="settings-sub-container">
         <div class="setting radio-buttons">
-            <span>Align image</span>
+            <span>Align images</span>
             <label>
                 <input type="radio" name="image-align" value="raggedright">
                 Left

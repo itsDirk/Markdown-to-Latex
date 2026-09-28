@@ -35,6 +35,7 @@ convertButton.addEventListener("click", () => {
     const outlineRows = document.getElementById("table2")?.checked || false;
     const outlineColumns = document.getElementById("table3")?.checked || false;
     const repeatHeaders = document.getElementById("table4")?.checked || false;
+    const floatTable = document.querySelector('input[name="table-float"]:checked').value;
     const alignTable = document.querySelector('input[name="table-align"]:checked').value;
     const alignTableContent = document.querySelector('input[name="table-content-align"]:checked').value;
     const floatImage = document.querySelector('input[name="image-float"]:checked').value;
@@ -46,6 +47,7 @@ convertButton.addEventListener("click", () => {
     config.table.outlineRows = outlineRows;
     config.table.outlineColumns = outlineColumns;
     config.table.repeatHeaders = repeatHeaders;
+    config.table.float = floatTable;
     config.table.align = alignTable;
     config.table.alignContent = alignTableContent;
     config.image.float = floatImage;
