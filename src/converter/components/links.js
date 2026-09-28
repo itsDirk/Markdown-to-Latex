@@ -18,6 +18,7 @@ export function replaceHyperLink(content) {
         // [Display text](#address)
         if (dest.startsWith("#")) {
             dest = dest.slice(1);
+            dest = toKebabCase(dest);
             result = `\\hyperref[${dest}]{${text}}`;
         } else {
             result = `\\href{${dest}}{${text}}`;
