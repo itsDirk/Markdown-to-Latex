@@ -1,3 +1,5 @@
+import {config} from "./config.js";
+
 export function replaceRegex(content, regex, sliceStart, sliceEnd,
                              resultStart, resultEnd, replaceContent = null, replacedContent = null) {
     let matches = content.matchAll(regex);
@@ -12,24 +14,22 @@ export function replaceRegex(content, regex, sliceStart, sliceEnd,
     return content;
 }
 
-let labels = new Set();
-
 export function generateLabel(title) {
     title = toKebabCase(title);
     let newLabel = title;
     let id = 1;
-    while (labels.has(newLabel)) {
+    while (config.labels.includes(newLabel)) {
         newLabel = `${title}-${id}`;
         id++;
     }
-    labels.add(newLabel);
+    config.labels.push(newLabel);
 
     return newLabel;
 }
 
 export function toKebabCase(content) {
     content = content.toLowerCase().trim();
-    content = content.replaceAll(/[^A-Za-z0-9:. _{}-]/g, "");
+    content = content.replaceAll(/[^A-Za-z0-9. _{}-]/g, "");
     content = content.replaceAll(/[ _{}]/g, "-");
     content = content.replaceAll(/^-|-$/g, "");
     content = content.replaceAll(/-{2,}/g, "-");

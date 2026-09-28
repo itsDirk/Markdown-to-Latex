@@ -1,5 +1,6 @@
 export const config = {
     packages: [],
+    labels: [],
     table: {
         headersBold: false,
         outlineRows: false,

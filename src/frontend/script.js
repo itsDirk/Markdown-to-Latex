@@ -41,6 +41,7 @@ convertButton.addEventListener("click", () => {
     const alignImage = document.querySelector('input[name="image-align"]:checked').value;
 
     config.packages = [];
+    config.labels = [];
     config.table.headersBold = tableHeadersBold;
     config.table.outlineRows = outlineRows;
     config.table.outlineColumns = outlineColumns;
