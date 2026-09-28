@@ -5,7 +5,6 @@ export function replaceImages(content) {
     content = replaceImage(content);
     // ![Alt Text](image.png "Image caption")
     content = replaceImageCaption(content);
-    console.log(config.settings.alignImage);
     return content;
 }
 
@@ -22,8 +21,12 @@ function replaceImage(content) {
             scale = (size / 700).toFixed(3);
         }
         const float = config.settings.floatImage;
+        const align = config.settings.alignImage;
+
         let result = `\\begin{figure}[${float}]\n` +
-            `\t\\includegraphics[width=${scale}\\linewidth]{${path}}\n` +
+            `\t\\${align}\n` +
+            `\t\\includegraphics[width=${scale}\\linewidth]\n` +
+            `\t{${path}}\n` +
             `\\end{figure}`
         content = content.replace(match[0], result);
     }
@@ -57,8 +60,12 @@ function replaceImageCaption(content) {
             scale = (size / 700).toFixed(3);
         }
         const float = config.settings.floatImage;
+        const align = config.settings.alignImage;
+
         let result = `\\begin{figure}[${float}]\n` +
-            `\t\\includegraphics[width=${scale}\\linewidth]{${path}}\n`;
+            `\t\\${align}\n` +
+            `\t\\includegraphics[width=${scale}\\linewidth]\n` +
+            `\t{${path}}\n`;
         if (caption) {
             result += `\t\\caption{${caption}}\n`;
         } else if (altText) {

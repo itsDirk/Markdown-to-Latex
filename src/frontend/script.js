@@ -38,6 +38,7 @@ convertButton.addEventListener("click", () => {
     const alignTable = document.querySelector('input[name="table-align"]:checked').value;
     const alignTableContent = document.querySelector('input[name="table-content-align"]:checked').value;
     const floatImage = document.querySelector('input[name="image-float"]:checked').value;
+    const alignImage = document.querySelector('input[name="image-align"]:checked').value;
 
     config.packages = [];
     config.settings.tableHeadersBold = tableHeadersBold;
@@ -47,6 +48,7 @@ convertButton.addEventListener("click", () => {
     config.settings.alignTable = alignTable;
     config.settings.alignTableContent = alignTableContent;
     config.settings.floatImage = floatImage;
+    config.settings.alignImage = alignImage;
 
     outputField.value = convertToLatex(inputField.value);
     downloadButton.disabled = !outputField.value;
