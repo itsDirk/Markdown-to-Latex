@@ -5,15 +5,15 @@ body {
     flex-direction: column;
 }
 
-h1 {
-    text-align: center;
-}
-
 footer {
     margin-top: auto;
     padding: 1rem;
     text-align: center;
     border-top: 1px solid #ddd;
+}
+
+h1 {
+    text-align: center;
 }
 
 .io-container {
@@ -61,12 +61,18 @@ footer {
     margin: 1em;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 1em;
 }
 
 .settings-sub-container {
     display: flex;
     flex-direction: column;
+}
+
+.settings-sub-container + .settings-sub-container {
+    border-left: 1px solid #ddd;
+    padding-left: 1em;
 }
 
 .radio-buttons {
