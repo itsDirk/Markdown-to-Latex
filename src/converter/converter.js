@@ -34,8 +34,8 @@ export function convertToLatex(content) {
 
     content = postClean(content);
     content = restoreMathBlocks(content, mathLines, mathBlocks);
-    content = replaceComments(content);
     findRequiredPackages(content);
+    content = replaceComments(content);
     content = restoreCodeBlocks(content, codeLines, codeBlocks);
 
     content = initializeDocument(content);

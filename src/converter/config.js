@@ -11,6 +11,7 @@ export const config = {
         alignContent: "center",
     },
     image: {
+        path: "",
         float: "h",
         align: "center",
     },

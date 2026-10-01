@@ -38,6 +38,7 @@ convertButton.addEventListener("click", () => {
     const floatTable = document.querySelector('input[name="table-float"]:checked').value;
     const alignTable = document.querySelector('input[name="table-align"]:checked').value;
     const alignTableContent = document.querySelector('input[name="table-content-align"]:checked').value;
+    const imagePath = document.getElementById("image-path")?.value || "";
     const floatImage = document.querySelector('input[name="image-float"]:checked').value;
     const alignImage = document.querySelector('input[name="image-align"]:checked').value;
 
@@ -50,6 +51,7 @@ convertButton.addEventListener("click", () => {
     config.table.float = floatTable;
     config.table.align = alignTable;
     config.table.alignContent = alignTableContent;
+    config.image.path = imagePath;
     config.image.float = floatImage;
     config.image.align = alignImage;
 

@@ -25,6 +25,7 @@ function replaceImage(content) {
         const float = config.image.float;
         const align = config.image.align;
         const label = getLabelFromPath(path);
+        path = config.image.path + path;
 
         let result = `\\begin{figure}[${float}]\n` +
             `\t\\${align}\n` +
@@ -67,6 +68,7 @@ function replaceImageCaption(content) {
         const float = config.image.float;
         const align = config.image.align;
         const label = getLabelFromPath(path);
+        path = config.image.path + path;
 
         let result = `\\begin{figure}[${float}]\n` +
             `\t\\${align}\n` +
