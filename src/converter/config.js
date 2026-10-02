@@ -12,6 +12,7 @@ export const config = {
     },
     image: {
         path: "",
+        merge: true,
         float: "h",
         align: "center",
     },
