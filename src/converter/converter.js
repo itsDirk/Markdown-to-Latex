@@ -32,9 +32,9 @@ export function convertToLatex(content) {
     content = replaceTables(content);
     content = replaceQuotes(content);
 
+    findRequiredPackages(content);
     content = postClean(content);
     content = restoreMathBlocks(content, mathLines, mathBlocks);
-    findRequiredPackages(content);
     content = replaceComments(content);
     content = restoreCodeBlocks(content, codeLines, codeBlocks);
 
@@ -46,7 +46,7 @@ function findRequiredPackages(content) {
     if (new RegExp(/\\href{.*?}{.*?}/).test(content)) {
         config.packages.push("\\usepackage[colorlinks=true, urlcolor=blue, linkcolor=blue]{hyperref}");
     }
-    if (new RegExp(/\$.*?\$/).test(content)) {
+    if (new RegExp(/=MATH=LINE=(\d+)=/).test(content) || /=MATH=BLOCK=(\d+)=/.test(content)) {
         config.packages.push("\\usepackage{amsmath}");
     }
     if (new RegExp(/\\includegraphics/).test(content)) {
