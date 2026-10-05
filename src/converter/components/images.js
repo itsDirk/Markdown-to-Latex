@@ -112,9 +112,9 @@ function mergeImages(content) {
 }
 
 function getLabelFromPath(path) {
-    let dirs = path.split("/");
+    let dirs = path.split(/[\/\\]/);
     let label = dirs[dirs.length - 1];
     let extensions = label.split(".");
-    label = label.replace(extensions[extensions.length - 1], "");
+    if (extensions.length > 1) label = label.replace(extensions[extensions.length - 1], "");
     return generateLabel(label);
 }
