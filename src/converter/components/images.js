@@ -26,15 +26,16 @@ function replaceImage(content) {
         }
         const float = config.image.float;
         const align = config.image.align;
+        const useLabels = config.image.label;
         const label = getLabelFromPath(path);
         path = config.image.path + path;
 
         let result = `\\begin{figure}[${float}]\n` +
             `\t\\${align}\n` +
             `\t\\includegraphics[width=${scale}\\linewidth]\n` +
-            `\t{${path}}\n` +
-            `\t\\label{${label}}\n` +
-            `\\end{figure}`
+            `\t{${path}}\n`;
+        if (useLabels) result += `\t\\label{${label}}\n`;
+        result += `\\end{figure}`
         content = content.replace(match[0], result);
     }
     return content;
@@ -69,14 +70,15 @@ function replaceImageCaption(content) {
         }
         const float = config.image.float;
         const align = config.image.align;
+        const useLabels = config.image.label;
         const label = getLabelFromPath(path);
         path = config.image.path + path;
 
         let result = `\\begin{figure}[${float}]\n` +
             `\t\\${align}\n` +
             `\t\\includegraphics[width=${scale}\\linewidth]\n` +
-            `\t{${path}}\n` +
-            `\t\\label{${label}}\n`;
+            `\t{${path}}\n`;
+        if (useLabels) result += `\t\\label{${label}}\n`;
 
         if (caption) {
             result += `\t\\caption{${caption}}\n`;
