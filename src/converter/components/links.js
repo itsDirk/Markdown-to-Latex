@@ -2,11 +2,11 @@ import {toKebabCase} from "../utils.js";
 
 export function replaceLinks(content) {
     content = replaceRefLink(content);
-    content = replaceHyperLink(content);
+    content = replaceInlineLink(content);
     return content;
 }
 
-export function replaceHyperLink(content) {
+export function replaceInlineLink(content) {
     // Replace [Display text](address) with \href{address}{Display text}
     let matches = content.matchAll(/\[.*?]\(.*?\)/g);
 

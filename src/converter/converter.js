@@ -33,11 +33,11 @@ export function convertToLatex(content) {
     content = replaceQuotes(content);
 
     findRequiredPackages(content);
-    content = postClean(content);
     content = restoreMathBlocks(content, mathLines, mathBlocks);
     content = replaceComments(content);
     content = restoreCodeBlocks(content, codeLines, codeBlocks);
 
+    content = postClean(content);
     content = initializeDocument(content);
     return content;
 }
@@ -89,5 +89,6 @@ function preClean(content) {
 
 function postClean(content) {
     content = content.replaceAll("\\|", "|");
+    content = content.replaceAll(/(?=[_&#])/g,"\\");
     return content;
 }
