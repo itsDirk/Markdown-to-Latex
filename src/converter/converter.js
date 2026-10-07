@@ -89,6 +89,7 @@ function preClean(content) {
 
 function postClean(content) {
     content = content.replaceAll("\\|", "|");
-    content = content.replaceAll(/(?=[_&#])/g,"\\");
+    content = content.replaceAll(/(?=[_&#])/g, "\\");
+    content = content.replaceAll(/\\ /g, "\\textbackslash ");
     return content;
 }
