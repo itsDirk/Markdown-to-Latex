@@ -3,7 +3,8 @@ export function removeMathBlocks(content) {
     let mathBlocks = [];
     content = content.replace(/\$\$.*?\$\$/gs, match => {
         const id = mathBlocks.length;
-        const code = match.slice(2, -2);
+        let code = match.slice(2, -2);
+        code = code.replaceAll("\n\n", "\n");
         mathBlocks.push(`\$\$${code}\$\$`);
         return `=MATH=BLOCK=${id}=`;
     });
@@ -12,7 +13,8 @@ export function removeMathBlocks(content) {
     let mathLines = [];
     content = content.replace(/\$.*?\$/g, match => {
         const id = mathLines.length;
-        const code = match.slice(1, -1);
+        let code = match.slice(1, -1);
+        code = code.replaceAll("\n\n", "\n");
         mathLines.push(`\$${code}\$`);
         return `=MATH=LINE=${id}=`;
     });

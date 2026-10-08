@@ -12,7 +12,20 @@ Nunc finibus enim vel ornare malesuada. Nulla rhoncus scelerisque quam ultricies
 $$
 2 * 3 * 4 = 24
 $$
+## Math with blank lines
+Nunc finibus enim vel ornare malesuada. Nulla rhoncus scelerisque quam ultricies volutpat. Maecenas placerat malesuada $CO_2 \rightarrow 2 * 3 * 4 = 24 \rightarrow 345.0Wh \cdot 9\cdot10^1 = 987.654.321Wh = 123MWh$ tellus vitae posuere.
+$$
 
+1.000.000kWh \cdot 123g 
+\approx 
+
+54.321kg 
+
+\longrightarrow
+
+\frac{468MWh}{9.753MW}= 0.11h=22.2 \text{ minutes}
+
+$$
 
 
 ## Sources
