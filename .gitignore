@@ -6,3 +6,4 @@ node_modules
 /output
 /input/images/
 /input/report/
+/input/*.ignore.md

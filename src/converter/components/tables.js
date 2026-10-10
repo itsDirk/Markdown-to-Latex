@@ -21,6 +21,7 @@ export function replaceTables(content) {
         for (const row of rows) {
             let cells = row.slice(1, -1).split(" | ");
             cells = cells.map((cell) => cell.trim());
+            cells = cells.map((cell) => cell.includes("\\\\") ? `\\shortstack{${cell}}` : cell);
             cells = cells.join(" & ");
             result += `\t${cells} \\\\\n`;
             if (config.table.outlineRows) result += `\t\\hline\n`;

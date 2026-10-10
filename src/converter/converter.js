@@ -84,7 +84,7 @@ function preClean(content) {
     content = content.replaceAll("%", "\\%");
     content = content.replaceAll("<br>", "\\\\");
     content = content.replaceAll(/<a name=".*?"><\/a>/g, "");
-    return content
+    return content;
 }
 
 function postClean(content) {
