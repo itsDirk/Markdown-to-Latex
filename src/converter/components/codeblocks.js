@@ -3,8 +3,9 @@ export function removeCodeBlocks(content) {
     let codeLines = [];
     content = content.replace(/(?<!`)`(?!`)(.*?)(?<!`)`(?!`)/g, match => {
         const id = codeLines.length;
-        const code = match.slice(1, -1);
-        codeLines.push(`\\texttt{${code}}`);
+        let code = match.slice(1, -1);
+        code = code.replaceAll("`", "");
+        codeLines.push(`\\verb\`${code}\``);
         return `=CODE=LINE=${id}=`;
     });
 
