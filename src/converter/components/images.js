@@ -97,9 +97,8 @@ function mergeImages(content) {
 
     for (const match of matches) {
         let result = match[0];
-        result = result.replaceAll(/\n\n/g, "");
         result = result.replaceAll(/\\begin{figure}\[.{1,2}]/g, "\\begin{subfigure}{0.5\\textwidth}");
-        result = result.replace("\\end{figure}", "\\end{subfigure}\n"); // First image
+        result = result.replace(/\\end{figure}[\n\t ]*/, "\\end{subfigure}\n"); // First image
         result = result.replace("\\end{figure}", "\\end{subfigure}"); // Second image
         result = result.replaceAll("\n", "\n\t");
         const float = config.image.float;
