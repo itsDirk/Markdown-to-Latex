@@ -65,6 +65,9 @@ function findRequiredPackages(content) {
     } else if (new RegExp(/\\st/).test(content)) {
         config.packages.push("\\usepackage{soul}");
     }
+    if (new RegExp(/\\begin{figure}\[H]/).test(content)){
+        config.packages.push("\\usepackage{float}");
+    }
 }
 
 function initializeDocument(content) {
