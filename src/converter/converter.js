@@ -55,7 +55,7 @@ function findRequiredPackages(content) {
     if (new RegExp(/\\hyperref/).test(content)) {
         config.packages.push("\\usepackage{hyperref}");
     }
-    if (new RegExp(/\\begin{subfigure}/)) {
+    if (new RegExp(/\\begin{subfigure}/).test(content)) {
         config.packages.push("\\usepackage{subcaption}");
     }
     // Note that this package does NOT come with the standard TeX studio distribution
@@ -65,7 +65,7 @@ function findRequiredPackages(content) {
     } else if (new RegExp(/\\st/).test(content)) {
         config.packages.push("\\usepackage{soul}");
     }
-    if (new RegExp(/\\begin{figure}\[H]/).test(content)){
+    if (new RegExp(/\\begin{figure}\[H]/).test(content)) {
         config.packages.push("\\usepackage{float}");
     }
 }
