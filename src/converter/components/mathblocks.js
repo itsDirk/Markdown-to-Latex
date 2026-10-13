@@ -3,19 +3,21 @@ export function removeMathBlocks(content) {
     let mathBlocks = [];
     content = content.replace(/\$\$.*?\$\$/gs, match => {
         const id = mathBlocks.length;
-        let code = match.slice(2, -2);
-        code = code.replaceAll("\n\n", "\n");
-        mathBlocks.push(`\$\$${code}\$\$`);
+        let math = match.slice(2, -2);
+        math = math.replaceAll("\n\n", "\n");
+        math = math.replaceAll(/\\\\(?=\S)/g, "\\\\ ")
+        math = math.replaceAll(/\\?\$/g, "\\$");
+        mathBlocks.push(`\$\$${math}\$\$`);
         return `=MATH=BLOCK=${id}=`;
     });
 
     // Store and replace $math$ with =MATH=LINE=0= temporarily
     let mathLines = [];
-    content = content.replace(/\$.*?\$/g, match => {
+    content = content.replace(/(?<!\\)\$.*(?<!\\)\$/g, match => {
         const id = mathLines.length;
-        let code = match.slice(1, -1);
-        code = code.replaceAll("\n\n", "\n");
-        mathLines.push(`\$${code}\$`);
+        let math = match.slice(1, -1);
+        math = math.replaceAll("\n\n", "\n");
+        mathLines.push(`\$${math}\$`);
         return `=MATH=LINE=${id}=`;
     });
 
