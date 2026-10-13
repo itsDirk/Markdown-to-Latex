@@ -14,7 +14,7 @@ export function writeFile(path, content) {
         const fileName = paths[paths.length-1];
         const newPath = path.replace(fileName,"");
 
-        consoleLog(`Creating new file "${fileName}" at ${newPath}`);
+        consoleLog(`Creating new file "${fileName}" at ${newPath}...`);
     }
 
     fs.writeFileSync(path, content);

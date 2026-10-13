@@ -31,7 +31,7 @@ export function toKebabCase(content) {
     content = content.toLowerCase().trim();
     content = content.replaceAll(/[^A-Za-z0-9 ._{}-]/g, "");
     content = content.replaceAll(/[ ._{}]/g, "-");
-    content = content.replaceAll(/^-|-$/g, "");
+    content = content.replaceAll(/^-+|-+$/g, "");
     content = content.replaceAll(/-{2,}/g, "-");
     return content;
 }
