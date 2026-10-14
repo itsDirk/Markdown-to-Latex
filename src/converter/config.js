@@ -6,7 +6,7 @@ export const config = {
         outlineRows: false,
         outlineColumns: false,
         repeatHeaders: false,
-        float: "h",
+        float: "H",
         align: "center",
         alignContent: "center",
     },
@@ -14,7 +14,7 @@ export const config = {
         path: "",
         merge: true,
         label: true,
-        float: "h",
+        float: "H",
         align: "center",
     },
 };
