@@ -70,7 +70,7 @@ function findRequiredPackages(content) {
     } else if (new RegExp(/\\st/).test(content)) {
         config.packages.push("\\usepackage{soul}");
     }
-    if (new RegExp(/\\begin{figure}\[H]/).test(content)) {
+    if (new RegExp(/\\begin{tabular}\[H]/).test(content) || /\\begin{figure}\[H]/) {
         config.packages.push("\\usepackage{float}");
     }
 }
