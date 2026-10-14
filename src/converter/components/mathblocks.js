@@ -1,7 +1,7 @@
 export function removeMathBlocks(content) {
     // Store and replace $$math$$ with =MATH=BLOCK=0= temporarily
     let mathBlocks = [];
-    content = content.replace(/\$\$.*?\$\$/gs, match => {
+    content = content.replace(/(?<!\\)\$\$.*?(?<!\\)\$\$/gs, match => {
         const id = mathBlocks.length;
         let math = match.slice(2, -2);
         math = math.replaceAll("\n\n", "\n");
@@ -14,7 +14,7 @@ export function removeMathBlocks(content) {
 
     // Store and replace $math$ with =MATH=LINE=0= temporarily
     let mathLines = [];
-    content = content.replace(/(?<!\\)\$.*(?<!\\)\$/g, match => {
+    content = content.replace(/(?<!\\)\$.*?(?<!\\)\$/g, match => {
         const id = mathLines.length;
         let math = match.slice(1, -1);
         math = math.replaceAll("\n\n", "\n");
