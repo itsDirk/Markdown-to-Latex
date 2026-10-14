@@ -9,7 +9,7 @@ Hello<world\>Hello[world]Hello(world)Hello|world
 Hello\\world\%Hello\&world\_Hello\#world\$Hello\{world\}
 Hello\<world\>Hello\[world\]Hello\(world\)Hello\|world
 
-!"#$%&'()*+,\-./:;<=>?@\[\]\\^_`{|}~
+!"#$%&'()\*+,-./:;<=>?@\[\]\\^\_\`{|}~
 
 \!\"\#\$\%\&\'\(\)\*\+\,\\\-\.\/\:\;
 \<\=\>\?\@\\\[\\\]\\\\\^\_\`\{\|\}\~
