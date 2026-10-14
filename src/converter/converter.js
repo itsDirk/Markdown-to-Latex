@@ -16,12 +16,14 @@ export function convertToLatex(content) {
         return initializeDocument("");
     }
 
-    content = preClean(content);
+    content = preRemove(content);
 
     let codeLines, codeBlocks;
     ({content, codeLines, codeBlocks} = removeCodeBlocks(content));
     let mathLines, mathBlocks;
     ({content, mathLines, mathBlocks} = removeMathBlocks(content));
+
+    content = postRemove(content);
 
     content = replaceImages(content);
     content = replaceLinks(content);
@@ -33,11 +35,14 @@ export function convertToLatex(content) {
     content = replaceQuotes(content);
 
     findRequiredPackages(content);
+
+    content = preRestore(content);
     content = restoreMathBlocks(content, mathLines, mathBlocks);
+    content = escapeMathChars(content);
     content = replaceComments(content);
     content = restoreCodeBlocks(content, codeLines, codeBlocks);
 
-    content = postClean(content);
+    content = postRestore(content);
     content = initializeDocument(content);
     return content;
 }
@@ -79,20 +84,29 @@ function initializeDocument(content) {
     return output;
 }
 
-function preClean(content) {
+function preRemove(content) {
     content = content.replaceAll("​", "");
-    content = content.replaceAll("\\[", "[");
-    content = content.replaceAll("\\]", "]");
-    content = content.replaceAll("\\%", "%");
-    content = content.replaceAll("%", "\\%");
-    content = content.replaceAll("<br>", "\\\\");
-    content = content.replaceAll(/<a name=".*?"><\/a>/g, "");
     return content;
 }
 
-function postClean(content) {
-    content = content.replaceAll("\\|", "|");
-    content = content.replaceAll(/(?=[_&#])/g, "\\");
-    content = content.replaceAll(/\\ /g, "\\textbackslash ");
+function postRemove(content) {
+    content = content.replaceAll(/\\ ?/g, "\\textbackslash ");
+    content = content.replaceAll(/(?=[%{}])/g, "\\");
+    return content;
+}
+
+function escapeMathChars(content) {
+    content = content.replaceAll(/(?=[&#])/g, "\\");
+    return content;
+}
+
+
+
+function preRestore(content) {
+    content = content.replaceAll(/(?=[_$])/g, "\\");
+    return content;
+}
+
+function postRestore(content) {
     return content;
 }
