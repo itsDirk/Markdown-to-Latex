@@ -38,11 +38,11 @@ export function convertToLatex(content) {
 
     content = preRestore(content);
     content = restoreMathBlocks(content, mathLines, mathBlocks);
-    content = escapeMathChars(content);
+    content = escapeMath(content);
+
     content = replaceComments(content);
     content = restoreCodeBlocks(content, codeLines, codeBlocks);
 
-    content = postRestore(content);
     content = initializeDocument(content);
     return content;
 }
@@ -88,25 +88,27 @@ function preRemove(content) {
     content = content.replaceAll("​", "");
     return content;
 }
-
 function postRemove(content) {
-    content = content.replaceAll(/\\ ?/g, "\\textbackslash ");
+    // Characters that are to be escaped globally before conversion, but not in math nor code blocks
+    content = content.replaceAll(/<a name=".*?"><\/a>/g, "");
+    content = content.replaceAll(/\\(?!\|) ?/g, "\\textbackslash ");
+    content = content.replaceAll("<br>", "\\\\");
     content = content.replaceAll(/(?=[%{}&])/g, "\\");
     return content;
 }
 
-function escapeMathChars(content) {
+function preRestore(content) {
+    // Characters that are to be escaped globally after conversion, but not in math nor code blocks
+    content = content.replaceAll(/(?=[_$])/g, "\\");
+    content = content.replaceAll("\\|", "|");
+    return content;
+}
+
+function escapeMath(content) {
+    // Characters that are to be escaped globally and in math blocks, but not in code blocks
     content = content.replaceAll(/(?=[#])/g, "\\");
     return content;
 }
 
-
-
-function preRestore(content) {
-    content = content.replaceAll(/(?=[_$])/g, "\\");
-    return content;
-}
-
-function postRestore(content) {
-    return content;
-}
+// content = content.replaceAll("\\[", "[");
+// content = content.replaceAll("\\]", "]");
