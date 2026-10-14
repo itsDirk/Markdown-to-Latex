@@ -1,33 +1,42 @@
 # Special characters
-## Characters \ % & _ # $ { } < > [ ] ( ) |
+## Characters \ \\ % & _ # $ { } < > [ ] ( ) | . /
 
-Hello \ % & _ # $ { } < > [ ] ( ) | world
-Hello\world%Hello&world_Hello#world$Hello{world}
-Hello<world>Hello[world]Hello(world)Hello|world
+Hello \ \\ % & _ # $ { } < > [ ] ( ) | world
 
-[Link](https://example.com/#:~:text=_documentation),
+\\Hello\world%Hello&world_Hello#world$Hello{world}
+Hello<world\>Hello[world]Hello(world)Hello|world
+
+Hello\\world\%Hello\&world\_Hello\#world\$Hello\{world\}
+Hello\<world\>Hello\[world\]Hello\(world\)Hello\|world
+
+!"#$%&'()*+,\-./:;<=>?@\[\]\\^_`{|}~
+
+\!\"\#\$\%\&\'\(\)\*\+\,\\\-\.\/\:\;
+\<\=\>\?\@\\\[\\\]\\\\\^\_\`\{\|\}\~
+
+[Link](https://example.com/#:~:text=documentation),
 [[#Special characters]],
 Price: $8,
 You & me,
-16%,
-1 < x < 3
+42%,
+2 < x < 4
 QED (quod erat demonstrandum)
 
 ## Math line
 
-$\ % & _ # \$ { } < > [ ] ( ) |$
+$\ \\ % & _ # \$ { } < > [ ] ( ) |$
 
-$\ % & _ # \$ { } < > [ ] ( ) |$
+$\ \\ % & _ # \$ { } < > [ ] ( ) |$
 
 
 ## Math block
 
 $$
-\ & _ # $ { } < > [ ] ( ) |
+\ \\ & _ # $ { } < > [ ] ( ) |
 $$
 
 $$
-\ % & _ # $ { } < > [ ] ( ) |
+\ \\ % & _ # $ { } < > [ ] ( ) |
 $$
 
 $$
@@ -36,9 +45,14 @@ $1 + \$2 = \\$3
 $$
 
 ## Code line
-`\ % & _ # $ { } < > [ ] ( ) |`
+`\ \\ % & _ # $ { } < > [ ] ( ) |`
 
 ## Code block
 ```
-\ % & _ # $ { } < > [ ] ( ) |
+\ \\ % & _ # $ { } < > [ ] ( ) |
 ```
+
+
+| 1 \| | 2         |
+| ---- | --------- |
+| $3$  | **4 \| ** |

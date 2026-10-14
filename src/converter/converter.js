@@ -91,9 +91,11 @@ function preRemove(content) {
 function postRemove(content) {
     // Characters that are to be escaped globally before conversion, but not in math nor code blocks
     content = content.replaceAll(/<a name=".*?"><\/a>/g, "");
+    // Un-escape all escapable characters to prevent double escaping them
+    content = content.replaceAll(/\\(?=[!"#$%&'()*+,\-./:;<=>?@\[\]\\^_`{}~])/g, "");
     content = content.replaceAll(/\\(?!\|) ?/g, "\\textbackslash ");
     content = content.replaceAll("<br>", "\\\\");
-    content = content.replaceAll(/(?=[%{}&])/g, "\\");
+    content = content.replaceAll(/(?=[%{}&^])/g, "\\");
     return content;
 }
 
@@ -101,8 +103,8 @@ function preRestore(content) {
     // Characters that are to be escaped globally after conversion, but not in math nor code blocks
     content = content.replaceAll(/(?=[_$])/g, "\\");
     content = content.replaceAll("\\|", "|");
-    content = content.replaceAll(/< ?/g, "\\textless ");
-    content = content.replaceAll(/> ?/g, "\\textgreater ");
+    content = content.replaceAll(/\\?< ?/g, "\\textless ");
+    content = content.replaceAll(/\\?> ?/g, "\\textgreater ");
     return content;
 }
 
@@ -111,6 +113,3 @@ function escapeMath(content) {
     content = content.replaceAll(/(?=[#])/g, "\\");
     return content;
 }
-
-// content = content.replaceAll("\\[", "[");
-// content = content.replaceAll("\\]", "]");
