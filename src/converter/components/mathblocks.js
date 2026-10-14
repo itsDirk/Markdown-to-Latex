@@ -7,6 +7,7 @@ export function removeMathBlocks(content) {
         math = math.replaceAll("\n\n", "\n");
         math = math.replaceAll(/\\\\(?=\S)/g, "\\\\ ")
         math = math.replaceAll(/\\?\$/g, "\\$");
+        math = escapeMathChars(math);
         mathBlocks.push(`\$\$${math}\$\$`);
         return `=MATH=BLOCK=${id}=`;
     });
@@ -18,6 +19,7 @@ export function removeMathBlocks(content) {
         let math = match.slice(1, -1);
         math = math.replaceAll("\n\n", "\n");
         math = math.replaceAll(/\\?%/g, "\\%");
+        math = escapeMathChars(math);
         mathLines.push(`\$${math}\$`);
         return `=MATH=LINE=${id}=`;
     });
@@ -37,4 +39,8 @@ export function restoreMathBlocks(content, mathLines, mathBlocks) {
     });
 
     return content;
+}
+
+function escapeMathChars(content) {
+    return content.replaceAll(/(?=[&])/g, "\\");
 }

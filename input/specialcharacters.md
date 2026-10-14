@@ -4,9 +4,11 @@
 Hello \ % & _ # $ { } | world
 Hello\world%Hello&world_Hello#world$Hello{world}Hello
 
-[Link](https://example.com/#:~:text=_documentation)
-[[#Special characters]]
-Price: $8
+[Link](https://example.com/#:~:text=_documentation),
+[[#Special characters]],
+Price: $8,
+You & me,
+16%,
 
 ## Math line
 
@@ -16,6 +18,10 @@ $% \ & _ # \$ { }$
 
 
 ## Math block
+
+$$
+\ & _ # $ { }
+$$
 
 $$
 \ % & _ # $ { }

@@ -91,12 +91,12 @@ function preRemove(content) {
 
 function postRemove(content) {
     content = content.replaceAll(/\\ ?/g, "\\textbackslash ");
-    content = content.replaceAll(/(?=[%{}])/g, "\\");
+    content = content.replaceAll(/(?=[%{}&])/g, "\\");
     return content;
 }
 
 function escapeMathChars(content) {
-    content = content.replaceAll(/(?=[&#])/g, "\\");
+    content = content.replaceAll(/(?=[#])/g, "\\");
     return content;
 }
 
