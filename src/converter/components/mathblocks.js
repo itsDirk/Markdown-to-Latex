@@ -17,6 +17,7 @@ export function removeMathBlocks(content) {
         const id = mathLines.length;
         let math = match.slice(1, -1);
         math = math.replaceAll("\n\n", "\n");
+        math = math.replaceAll(/\\?%/g, "\\%");
         mathLines.push(`\$${math}\$`);
         return `=MATH=LINE=${id}=`;
     });
