@@ -1,30 +1,33 @@
 # Special characters
-## Characters \ % & _ # $ { } |
+## Characters \ % & _ # $ { } < > [ ] ( ) |
 
-Hello \ % & _ # $ { } | world
-Hello\world%Hello&world_Hello#world$Hello{world}Hello
+Hello \ % & _ # $ { } < > [ ] ( ) | world
+Hello\world%Hello&world_Hello#world$Hello{world}
+Hello<world>Hello[world]Hello(world)Hello|world
 
 [Link](https://example.com/#:~:text=_documentation),
 [[#Special characters]],
 Price: $8,
 You & me,
 16%,
+1 < x < 3
+QED (quod erat demonstrandum)
 
 ## Math line
 
-$% \ & _ # \$ { }$
+$\ % & _ # \$ { } < > [ ] ( ) |$
 
-$% \ & _ # \$ { }$
+$\ % & _ # \$ { } < > [ ] ( ) |$
 
 
 ## Math block
 
 $$
-\ & _ # $ { }
+\ & _ # $ { } < > [ ] ( ) |
 $$
 
 $$
-\ % & _ # $ { }
+\ % & _ # $ { } < > [ ] ( ) |
 $$
 
 $$
@@ -33,9 +36,9 @@ $1 + \$2 = \\$3
 $$
 
 ## Code line
-`\ % & _ # $ { }`
+`\ % & _ # $ { } < > [ ] ( ) |`
 
 ## Code block
 ```
-\ % & _ # $ { }
+\ % & _ # $ { } < > [ ] ( ) |
 ```

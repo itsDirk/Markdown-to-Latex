@@ -101,6 +101,8 @@ function preRestore(content) {
     // Characters that are to be escaped globally after conversion, but not in math nor code blocks
     content = content.replaceAll(/(?=[_$])/g, "\\");
     content = content.replaceAll("\\|", "|");
+    content = content.replaceAll(/< ?/g, "\\textless ");
+    content = content.replaceAll(/> ?/g, "\\textgreater ");
     return content;
 }
 
