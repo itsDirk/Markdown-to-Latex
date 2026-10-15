@@ -93,12 +93,12 @@ function replaceImageCaption(content) {
 }
 
 function mergeImages(content) {
-    const matches = content.matchAll(/(\\begin{figure}\[.]\n(.+?\n)+\\end{figure}[\n\t ]*?){2}/g);
+    const matches = content.matchAll(/(\\begin{figure}\[.]\n(.+?\n)+\\end{figure}\s*?){2}/g);
 
     for (const match of matches) {
         let result = match[0];
         result = result.replaceAll(/\\begin{figure}\[.]/g, "\\begin{subfigure}{0.5\\textwidth}");
-        result = result.replace(/\\end{figure}[\n\t ]*/, "\\end{subfigure}\n"); // First image
+        result = result.replace(/\\end{figure}\s*/, "\\end{subfigure}\n"); // First image
         result = result.replace("\\end{figure}", "\\end{subfigure}"); // Second image
         result = result.replaceAll("\n", "\n\t");
         const float = config.image.float;
