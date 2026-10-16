@@ -30,22 +30,23 @@ export function replaceInlineLink(content) {
 
 function replaceRefLink(content) {
     // Replace [[#Ref 1]] with \hyperref[ref-1]{Ref 1}
-    let regex = new RegExp(/\[\[#.+?]]/g);
-    let matches = content.matchAll(regex);
+    let matches = content.matchAll(/\[\[#.+?]]/g);
 
     for (const match of matches) {
         let result = match[0].slice(3, -2);
-        let refName = result;
-        let refText = result;
+        let dest = result.trim();
+        if (!dest) continue;
+        let text = dest;
 
         // [[#Ref 1|Link to ref 1]]
-        if (/^.+?\|.*$/.test(result)) {
-            refName = result.split("|")[0];
-            refText = result.replace(`${refName}|`, "");
+        if (/^.*?\|.*$/.test(result)) {
+            dest = result.split("|")[0].trim();
+            if (!dest) continue;
+            text = result.replace(`${dest}|`, "");
         }
 
-        refName = toKebabCase(refName);
-        result = `\\hyperref[${refName}]{${refText}}`;
+        dest = toKebabCase(dest);
+        result = `\\hyperref[${dest}]{${text}}`;
         content = content.replace(match[0], result);
     }
     return content;

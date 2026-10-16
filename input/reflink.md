@@ -20,11 +20,28 @@ Obsidian however, doesn't. It uses a different syntax to link to headers. There 
 ###### Header 6
 
 [[#Header 1|Link to header 1]]
-[[#Header 2|Link to header 2]]
-[[#Header 3|Link to header 3]]
-[[#Header 4|Link to header 4]]
-[[#Header 5|Link to header 5]]
-[[#Header 6|Link to header 6]]
+[[#Header 2| Link to header 2]]
+[[#Header 3|Link to header 3 ]]
+[[#Header 4| Link to header 4 ]]
+[[#Header 5|    Link to header 5]]
+[[#Header 6|Link to header 6    ]]
+
+## Empty destination
+[[#]]
+[[# ]]
+[[ #]]
+[[ # ]]
+[[ ]]
+[[#| Link to ref 1 ]]
+[[ #| Link to ref 1 ]]
+[[# | Link to ref 1 ]]
+[[ # | Link to ref 1 ]]
+[[ | Link to ref 1 ]]
+[[#|  ]]
+[[ #|  ]]
+[[# |  ]]
+[[ # |  ]]
+[[ |  ]]
 
 ## Duplicate header
 
