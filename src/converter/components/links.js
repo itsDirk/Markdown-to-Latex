@@ -1,12 +1,21 @@
 import {toKebabCase} from "../utils.js";
 
 export function replaceLinks(content) {
-    content = replaceRefLink(content);
     content = replaceInlineLink(content);
+    content = replaceUrlText(content);
+    content = replaceRefLink(content);
     return content;
 }
 
-export function replaceInlineLink(content) {
+function replaceUrlText(content) {
+    // Official url regex (https://uibakery.io/regex-library/url)
+    const regex = /(?<=^|\s)https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,63}\b([-a-zA-Z0-9()@:%_+.~#?&\/=]*)(?=$|\s)/g;
+
+    return content.replace(regex, (match) => {
+        return `\\href{${match.trim()}}{${match.trim()}}`
+    });
+}
+
 function replaceInlineLink(content) {
     // Replace [Display text](address) with \href{address}{Display text}
     let matches = content.matchAll(/\[.*?]\(.*?\)/g);
@@ -24,7 +33,7 @@ function replaceInlineLink(content) {
             dest = toKebabCase(dest);
             result = `\\hyperref[${dest}]{${text}}`;
         } else {
-        // [Display text](address)
+            // [Display text](address)
             result = `\\href{${dest}}{${text}}`;
         }
         content = content.replace(match[0], result);
