@@ -7,13 +7,16 @@ export function replaceLinks(content) {
 }
 
 export function replaceInlineLink(content) {
+function replaceInlineLink(content) {
     // Replace [Display text](address) with \href{address}{Display text}
     let matches = content.matchAll(/\[.*?]\(.*?\)/g);
 
     for (const match of matches) {
         let result = match[0].slice(1, -1);
         let text = result.split("](")[0];
-        let dest = result.split("](")[1];
+        let dest = result.split("](")[1].trim();
+
+        if (!text.trim() || !dest) continue;
 
         // [Display text](#address)
         if (dest.startsWith("#")) {
@@ -21,6 +24,7 @@ export function replaceInlineLink(content) {
             dest = toKebabCase(dest);
             result = `\\hyperref[${dest}]{${text}}`;
         } else {
+        // [Display text](address)
             result = `\\href{${dest}}{${text}}`;
         }
         content = content.replace(match[0], result);
