@@ -15,23 +15,23 @@ export function replaceRegex(content, regex, sliceStart, sliceEnd,
 }
 
 export function generateLabel(title) {
-    title = toKebabCase(title);
-    let newLabel = title;
+    const baseLabel = toLabelCase(title);
+    let newLabel = baseLabel;
+    
     let id = 1;
     while (config.labels.includes(newLabel)) {
-        newLabel = `${title}-${id}`;
+        newLabel = `${baseLabel}-${id}`;
         id++;
     }
     config.labels.push(newLabel);
-
     return newLabel;
 }
 
-export function toKebabCase(content) {
-    content = content.toLowerCase().trim();
-    content = content.replaceAll(/[^A-Za-z0-9 ._{}-]/g, "");
-    content = content.replaceAll(/[ ._{}]/g, "-");
-    content = content.replaceAll(/^-+|-+$/g, "");
-    content = content.replaceAll(/-{2,}/g, "-");
-    return content;
+export function toLabelCase(content) {
+    return content.toLowerCase()
+        .replaceAll(/[^a-z0-9 _-]/g, "")
+        .trim()
+        .replaceAll(/[_ ]/g, "-")
+        .replaceAll(/^-+|-+$/g, "")
+        .replaceAll(/-{2,}/g, "-");
 }

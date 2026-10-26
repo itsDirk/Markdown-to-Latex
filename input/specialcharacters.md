@@ -16,6 +16,7 @@ Hello\<world\>Hello\[world\]Hello\(world\)Hello\|world
 
 [Link](https://example.com/#:~:text=documentation),
 [[#Special characters]],
+[[#Characters \ \\ % & _ # $ { } < > [ ] ( ) | . /]]
 Price: $8,
 You & me,
 42%,

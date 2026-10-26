@@ -1,4 +1,4 @@
-import {toKebabCase} from "../utils.js";
+import {toLabelCase} from "../utils.js";
 
 export function replaceLinks(content) {
     content = replaceInlineLink(content);
@@ -30,7 +30,7 @@ function replaceInlineLink(content) {
         // [Display text](#address)
         if (dest.startsWith("#")) {
             dest = dest.slice(1);
-            dest = toKebabCase(dest);
+            dest = toLabelCase(dest);
             result = `\\hyperref[${dest}]{${text}}`;
         } else {
             // [Display text](address)
@@ -58,7 +58,7 @@ function replaceRefLink(content) {
             text = result.replace(`${dest}|`, "");
         }
 
-        dest = toKebabCase(dest);
+        dest = toLabelCase(dest);
         result = `\\hyperref[${dest}]{${text}}`;
         content = content.replace(match[0], result);
     }
