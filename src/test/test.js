@@ -1,4 +1,4 @@
-import {consoleLog} from "../converter/logger.js";
+import {consoleLog, consoleWarn} from "../converter/logger.js";
 import {readFile} from "../converter/fileio/fileReader.js";
 import {convertToLatex} from "../converter/converter.js";
 import fs from "fs";
@@ -10,10 +10,13 @@ function executeTest(suite) {
     const input = readFile(inputPath);
     const expected = readFile(expectedPath);
 
-    let output;
-    if (input) output = convertToLatex(input);
+    let output = convertToLatex(input);
 
-    consoleLog(output === expected);
+    if (output === expected) {
+        consoleLog(`Test suite: "${suite}" passed`);
+    } else {
+        consoleWarn(`Test suite: "${suite}" failed`)
+    }
 }
 
 function executeTests() {
