@@ -17,7 +17,7 @@ export function replaceRegex(content, regex, sliceStart, sliceEnd,
 export function generateLabel(title) {
     const baseLabel = toLabelCase(title);
     let newLabel = baseLabel;
-    
+
     let id = 1;
     while (config.labels.includes(newLabel)) {
         newLabel = `${baseLabel}-${id}`;

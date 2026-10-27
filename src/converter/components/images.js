@@ -43,7 +43,7 @@ function replaceImage(content) {
 
 function replaceImageCaption(content) {
     // ![Alt Text](image.png "Image caption")
-    const matches = content.matchAll(/!\[.*]\(.+?\)/g);
+    const matches = content.matchAll(/!\[.*?]\(.+?\)/g);
 
     for (const match of matches) {
         let path = match[0].slice(2, -1);
@@ -93,7 +93,7 @@ function replaceImageCaption(content) {
 }
 
 function mergeImages(content) {
-    const matches = content.matchAll(/(\\begin{figure}\[.]\n(.+?\n)+\\end{figure}\s*?){2}/g);
+    const matches = content.matchAll(/(\\begin{figure}\[.]\n(.+?\n)+?\\end{figure}\s*?){2}/g);
 
     for (const match of matches) {
         let result = match[0];

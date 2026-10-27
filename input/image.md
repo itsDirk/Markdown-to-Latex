@@ -1,46 +1,46 @@
 # All different kinds of images
 Maiores repellat consequatur aperiam deserunt.
-Praesentium omnis impedit dolorem alias. 
-### Full-sized image
+Praesentium omnis impedit dolorem alias.
+## Full-sized image
 Esse quod dolores quidem error corrupti tempora quae.
 ![[images/image1.png]]
 Natus ut delectus voluptatibus iste tenetur.
 
-### Scaled down image
+## Scaled down image
 Vero qui quasi est quaerat dicta placeat quos possimus.
 ![[images/image2.png|581]]
 Voluptatem esse laborum doloremque adipisci non.
-### Image with alt text
+## Image with alt text
 ![This is alt text](images/image3.png)
 
-### Image with alt text scaled
+## Image with alt text scaled
 ![This is alt text|529](images/image4.png)
 
-### Image with alt text badly scaled
+## Image with alt text badly scaled
 ![This is alt text|e529](images/image1.png)
 
-### Image with empty alt text
+## Image with empty alt text
 ![](images/image5.png)
 
-### Alt text + caption
+## Alt text + caption
 ![Alt text](images/image1.png "The actual caption")
 
-### Scaled alt text + caption
+## Scaled alt text + caption
 ![Alt text|675](images/image2.png "The actual caption")
 
-### Scaled empty alt text + caption
+## Scaled empty alt text + caption
 ![562](images/image3.png "The actual caption")
 
-### Scaled empty alt text + caption with bar
+## Scaled empty alt text + caption with bar
 ![|511](images/image4.png "The actual caption")
 
-### Scaled bad alt text + caption
+## Scaled bad alt text + caption
 ![|e558](images/image5.png "The actual caption")
 
-### Scaled empty alt text + empty caption
+## Scaled empty alt text + empty caption
 ![623](images/image1.png "")
 
-### Many subsequent images
+## Many subsequent images
 ![Alt text](images/image1.png "The actual caption")
 
 ![Alt text](images/image2.png "The actual caption")
@@ -49,5 +49,29 @@ Voluptatem esse laborum doloremque adipisci non.
 
 ![Alt text](images/image4.png "The actual caption")
 
-### No relative path
-![[image1.png]]  
+## No relative path
+%%![[image1.png]] %%
+
+## Whitespaces
+
+![[ images/image1.png]]
+![[images/image2.png ]]
+![[ images/image3.png ]]
+![[     images/image4.png   ]]
+
+![This is alt text]( images/image1.png)
+![This is alt text](images/image1.png )
+![This is alt text]( images/image1.png )
+![This is alt text](    images/image1.png   )
+
+## Multiple images on same line
+
+![[images/image1.png]] ![[images/image1.png]]
+
+![[images/image2.png]]![[images/image2.png]]
+
+![This is alt text](images/image3.png) ![This is alt text](images/image3.png)
+
+![[images/image4.png]] ![This is alt text](images/image4.png)
+
+![This is alt text](images/image5.png) ![[images/image5.png]]
