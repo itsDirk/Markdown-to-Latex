@@ -7,7 +7,7 @@ export const config = {
         outlineColumns: false,
         repeatHeaders: false,
         float: "H",
-        align: "center",
+        align: "centering",
         alignContent: "center",
     },
     image: {
@@ -15,6 +15,6 @@ export const config = {
         merge: true,
         label: true,
         float: "H",
-        align: "center",
+        align: "centering",
     },
 };
