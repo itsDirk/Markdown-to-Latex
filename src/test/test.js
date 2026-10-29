@@ -4,12 +4,13 @@ import {convertToLatex} from "../converter/converter.js";
 import fs from "fs";
 
 function assertTest(testCode, output, expected) {
+    testCode = testCode.replaceAll("=", " ").trim();
     if (output === expected) {
         consoleLog(`${testCode}: PASSED`);
         return true;
     } else {
         consoleWarn(`${testCode}: FAILED`);
-        consoleWarn(`Expected:\n${expected}\nRecieved:\n${output}`);
+        // consoleWarn(`Expected:\n${expected}\nRecieved:\n${output}`);
         return false;
     }
 }
@@ -29,12 +30,13 @@ function executeSuite(suite) {
     let totalTests = Math.floor(testsExpected.length/2);
     let totalPassed = 0;
 
+    consoleLog(`===== ${suite.toUpperCase()} =====`);
 
     for (let i = 1; i < testsExpected.length; i+=2){
-        if (assertTest(testsOutput[i+1], testsExpected[i+1])) totalPassed++;
+        if (assertTest(testsOutput[i], testsOutput[i+1], testsExpected[i+1])) totalPassed++;
     }
 
-    consoleLog(`Suite ${suite}: ${totalPassed}/${totalTests} tests passed`);
+    consoleLog(`Suite ${suite}: ${totalPassed}/${totalTests} (${Math.round(totalPassed/totalTests*100)}%) tests passed`);
     return totalPassed === totalTests;
 }
 
