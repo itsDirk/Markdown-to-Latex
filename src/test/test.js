@@ -31,7 +31,6 @@ function executeSuite(suite) {
         return;
     }
 
-
     const output = convertToLatex(input);
 
     let testsOutput = output.split(/(=TEST=\d+(?:\.\d+)*=)/);
@@ -51,7 +50,8 @@ function executeSuite(suite) {
         if (assertTest(testsOutput[i], testsOutput[i + 1], testsExpected[i + 1])) totalPassed++;
     }
 
-    consoleLog(`Finished testing suite "${suite}": ${totalPassed}/${totalTests} (${Math.round(totalPassed / totalTests * 100)}%) tests passed`);
+    let lvl = totalPassed === totalTests ? 'info' : 'warn';
+    consoleLog(`Finished testing suite "${suite}": ${totalPassed}/${totalTests} (${Math.round(totalPassed / totalTests * 100)}%) tests passed`, lvl);
     return totalPassed === totalTests;
 }
 
@@ -65,7 +65,8 @@ function executeTests() {
     }
 
     consoleLog(`===== RESULT =====`);
-    consoleLog(`Finished executing all test suites\n${passedTests}/${suites.length} test suites passed`);
+    let lvl = passedTests === suites.length ? 'info' : 'warn';
+    consoleLog(`Finished executing all test suites: ${passedTests}/${suites.length} test suites passed`, lvl);
 }
 
 function getDirNames(path) {

@@ -22,7 +22,7 @@ function logTest() {
 }
 
 export const consoleWrite = (msg) => log('info', msg);
-export const consoleLog = (msg) => log('info', msg);
+export const consoleLog = (msg, lvl = 'info') => log(lvl, msg);
 export const consoleWarn = (msg) => log('warn', msg);
 export const consoleError = (msg) => log('error', msg);
 
