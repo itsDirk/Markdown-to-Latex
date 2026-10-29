@@ -3,6 +3,8 @@ import {readFile} from "../converter/fileio/fileReader.js";
 import {convertToLatex} from "../converter/converter.js";
 import fs from "fs";
 
+let failedTests = [];
+
 function assertTest(testCode, output, expected) {
     testCode = testCode.replaceAll("=", " ").trim();
     if (output === expected) {
@@ -11,6 +13,7 @@ function assertTest(testCode, output, expected) {
     } else {
         consoleWarn(`${testCode}: FAILED`);
         // consoleWarn(`Expected:\n${expected}\nRecieved:\n${output}`);
+        failedTests.push(testCode);
         return false;
     }
 }
@@ -67,6 +70,13 @@ function executeTests() {
     consoleLog(`===== RESULT =====`);
     let lvl = passedTests === suites.length ? 'info' : 'warn';
     consoleLog(`Finished executing all test suites: ${passedTests}/${suites.length} test suites passed`, lvl);
+
+    if (passedTests !== suites.length) {
+        consoleWarn("Failed tests:");
+        for (let i = 0; i < failedTests.length; i++) {
+            consoleWarn(`(${i + 1}/${failedTests.length}): ${failedTests[i]}`);
+        }
+    }
 }
 
 function getDirNames(path) {
