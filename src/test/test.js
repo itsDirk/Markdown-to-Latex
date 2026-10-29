@@ -22,6 +22,16 @@ function executeSuite(suite) {
     const input = readFile(inputPath);
     const expected = readFile(expectedPath);
 
+    if (!input) {
+        consoleError(`File "${inputPath}" and "${expectedPath}" cannot not be empty`);
+        return;
+    }
+    if (!expected) {
+        consoleError(`File "${expectedPath}" and "${expectedPath}" cannot not be empty`);
+        return;
+    }
+
+
     const output = convertToLatex(input);
 
     let testsOutput = output.split(/(=TEST=\d+(?:\.\d+)*=)/);
@@ -41,7 +51,7 @@ function executeSuite(suite) {
         if (assertTest(testsOutput[i], testsOutput[i + 1], testsExpected[i + 1])) totalPassed++;
     }
 
-    consoleLog(`Suite ${suite}: ${totalPassed}/${totalTests} (${Math.round(totalPassed / totalTests * 100)}%) tests passed`);
+    consoleLog(`Finished testing suite "${suite}": ${totalPassed}/${totalTests} (${Math.round(totalPassed / totalTests * 100)}%) tests passed`);
     return totalPassed === totalTests;
 }
 
@@ -55,7 +65,7 @@ function executeTests() {
     }
 
     consoleLog(`===== RESULT =====`);
-    consoleLog(`${passedTests}/${suites.length} test suites passed`);
+    consoleLog(`Finished executing all test suites\n${passedTests}/${suites.length} test suites passed`);
 }
 
 function getDirNames(path) {
