@@ -1,4 +1,4 @@
-import {consoleLog, consoleWarn} from "../converter/logger.js";
+import {consoleError, consoleLog, consoleWarn} from "../converter/logger.js";
 import {readFile} from "../converter/fileio/fileReader.js";
 import {convertToLatex} from "../converter/converter.js";
 import fs from "fs";
@@ -27,16 +27,21 @@ function executeSuite(suite) {
     let testsOutput = output.split(/(=TEST=\d+(?:\.\d+)*=)/);
     let testsExpected = expected.split(/(=TEST=\d+(?:\.\d+)*=)/);
 
-    let totalTests = Math.floor(testsExpected.length/2);
+    let totalTests = Math.floor(testsExpected.length / 2);
     let totalPassed = 0;
+
+    if (totalTests === 0) {
+        consoleError(`No tests found in suite "${suite}"`);
+        return;
+    }
 
     consoleLog(`===== ${suite.toUpperCase()} =====`);
 
-    for (let i = 1; i < testsExpected.length; i+=2){
-        if (assertTest(testsOutput[i], testsOutput[i+1], testsExpected[i+1])) totalPassed++;
+    for (let i = 1; i < testsExpected.length; i += 2) {
+        if (assertTest(testsOutput[i], testsOutput[i + 1], testsExpected[i + 1])) totalPassed++;
     }
 
-    consoleLog(`Suite ${suite}: ${totalPassed}/${totalTests} (${Math.round(totalPassed/totalTests*100)}%) tests passed`);
+    consoleLog(`Suite ${suite}: ${totalPassed}/${totalTests} (${Math.round(totalPassed / totalTests * 100)}%) tests passed`);
     return totalPassed === totalTests;
 }
 
@@ -49,6 +54,7 @@ function executeTests() {
         if (executeSuite(suite)) passedTests += 1;
     }
 
+    consoleLog(`===== RESULT =====`);
     consoleLog(`${passedTests}/${suites.length} test suites passed`);
 }
 

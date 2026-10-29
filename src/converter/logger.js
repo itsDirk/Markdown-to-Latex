@@ -13,7 +13,6 @@ function log(lvl, msg) {
     for (let message of messages) {
         console.log(`${colors[lvl]}[${lvl.toUpperCase()}] ${message}${colors.reset}`);
     }
-
 }
 
 function logTest() {
