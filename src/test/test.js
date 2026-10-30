@@ -1,5 +1,5 @@
-import {consoleError, consoleLog, consoleWarn} from "../converter/logger.js";
-import {readFile} from "../converter/fileio/fileReader.js";
+import {consoleError, consoleLog, consoleWarn} from "../logging/logger.js";
+import {readFile} from "../fileio/fileReader.js";
 import {convertToLatex} from "../converter/converter.js";
 import fs from "fs";
 

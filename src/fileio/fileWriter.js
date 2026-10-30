@@ -1,5 +1,5 @@
 import fs from "fs";
-import {consoleError, consoleLog, consoleWarn} from "../logger.js";
+import {consoleError, consoleLog, consoleWarn} from "../logging/logger.js";
 
 export function writeFile(path, content) {
     if (!path) {

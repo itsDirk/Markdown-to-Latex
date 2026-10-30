@@ -100,7 +100,28 @@ a/b=c
 [//]: # (1+2=3)
 $$
 
+$$
+
+1.000.000kWh \cdot 123g 
+\approx 
+54.321kg 
+
+% \longrightarrow
+%%\longrightarrow%%
+
+\longrightarrow
+
+[//]: # (\longrightarrow)
+\longrightarrow
+
+\frac{468MWh}{9.753MW}= 0.11h=22.2 \text{ minutes}
+
+$$
+
 ```
 helloWorld("print");
 <!-- helloWorld(); -->
 ```
+
+https://www.dirkvanroosmalen.com
+[Hello world](https://www.dirkvanroosmalen.com)

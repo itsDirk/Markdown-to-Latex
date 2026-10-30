@@ -1,5 +1,5 @@
 import fs from "fs";
-import {consoleError} from "../logger.js";
+import {consoleError} from "../logging/logger.js";
 
 export function readFile(path) {
     if (!path) {

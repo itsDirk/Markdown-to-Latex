@@ -1,7 +1,7 @@
-import {readFile} from "./converter/fileio/fileReader.js";
-import {writeFile} from "./converter/fileio/fileWriter.js";
+import {readFile} from "./fileio/fileReader.js";
+import {writeFile} from "./fileio/fileWriter.js";
 import {convertToLatex} from "./converter/converter.js";
-import {consoleLog} from "./converter/logger.js";
+import {consoleLog} from "./logging/logger.js";
 
 const fileName = "highlight";
 const inputPath = `./input/${fileName}.md`;
