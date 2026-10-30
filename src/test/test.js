@@ -5,7 +5,7 @@ import fs from "fs";
 
 let failedTests = [];
 
-function assertTest(testCode, output, expected) {
+function assertTest(testCode, suite, output, expected) {
     testCode = testCode.replaceAll("=", " ").trim();
     if (output === expected) {
         consoleLog(`${testCode}: PASSED`);
@@ -13,7 +13,7 @@ function assertTest(testCode, output, expected) {
     } else {
         consoleWarn(`${testCode}: FAILED`);
         // consoleWarn(`Expected:\n${expected}\nRecieved:\n${output}`);
-        failedTests.push(testCode);
+        failedTests.push(`[${suite.toUpperCase()}] ${testCode}`);
         return false;
     }
 }
@@ -36,8 +36,9 @@ function executeSuite(suite) {
 
     const output = convertToLatex(input);
 
-    let testsOutput = output.split(/(=TEST=\d+(?:\.\d+)*=)/);
-    let testsExpected = expected.split(/(=TEST=\d+(?:\.\d+)*=)/);
+    const testCaseRegex = /(=TEST=\d+(?:\.\d+)*=)/;
+    let testsOutput = output.split(testCaseRegex);
+    let testsExpected = expected.split(testCaseRegex);
 
     let totalTests = Math.floor(testsExpected.length / 2);
     let totalPassed = 0;
@@ -50,7 +51,7 @@ function executeSuite(suite) {
     consoleLog(`===== ${suite.toUpperCase()} =====`);
 
     for (let i = 1; i < testsExpected.length; i += 2) {
-        if (assertTest(testsOutput[i], testsOutput[i + 1], testsExpected[i + 1])) totalPassed++;
+        if (assertTest(testsOutput[i], suite, testsOutput[i + 1], testsExpected[i + 1])) totalPassed++;
     }
 
     let lvl = totalPassed === totalTests ? 'info' : 'warn';
