@@ -72,7 +72,7 @@ function executeTests() {
     let lvl = passedTests === suites.length ? 'info' : 'warn';
     consoleLog(`Finished executing all test suites: ${passedTests}/${suites.length} test suites passed`, lvl);
 
-    if (passedTests !== suites.length) {
+    if (failedTests.length > 0) {
         consoleWarn("Failed tests:");
         for (let i = 0; i < failedTests.length; i++) {
             consoleWarn(`(${i + 1}/${failedTests.length}): ${failedTests[i]}`);
