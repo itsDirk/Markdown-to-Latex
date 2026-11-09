@@ -48,7 +48,7 @@ export function convertToLatex(content) {
 }
 
 function findRequiredPackages(content) {
-    if (new RegExp(/\\href{.*?}{.*?}/).test(content)) {
+    if (new RegExp(/\\href{.*?}{.*?}/).test(content) || (/\\hyperref/).test(content)) {
         config.packages.push("\\usepackage[colorlinks=true, urlcolor=blue, linkcolor=blue]{hyperref}");
     }
     if (new RegExp(/=MATH=LINE=(\d+)=/).test(content) || /=MATH=BLOCK=(\d+)=/.test(content)) {
@@ -56,9 +56,6 @@ function findRequiredPackages(content) {
     }
     if (new RegExp(/\\includegraphics/).test(content)) {
         config.packages.push("\\usepackage{graphicx}");
-    }
-    if (new RegExp(/\\hyperref/).test(content)) {
-        config.packages.push("\\usepackage{hyperref}");
     }
     if (new RegExp(/\\begin{subfigure}/).test(content)) {
         config.packages.push("\\usepackage{subcaption}");
