@@ -7,5 +7,7 @@ export function replaceHorizontalLines(content) {
     content = replaceRegex(content, /(?<=\n|^) *\* *\* *\*[* ]*(\n|$)/g, 999, 0, "\\par\\noindent\\rule{\\textwidth}{0.4pt}\n", "");
     // Replace ___ with a horizontal line
     content = replaceRegex(content, /(?<=\n|^) *_ *_ *_[_ ]*(\n|$)/g, 999, 0, "\\par\\noindent\\rule{\\textwidth}{0.4pt}\n", "");
+    // Replace <hr> with a horizontal line
+    content = replaceRegex(content, /<hr\s*>/g, 999, 0, "\\par\\noindent\\rule{\\textwidth}{0.4pt}\n", "");
     return content;
 }

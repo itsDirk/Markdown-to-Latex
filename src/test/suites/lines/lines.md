@@ -67,3 +67,43 @@ ___
 ```
 =TEST=3.9=
 %%___%%
+
+
+=TEST=4.1=
+<hr>
+=TEST=4.2=
+            <hr>             
+=TEST=4.3=
+<hr><hr><hr>
+
+=TEST=4.4=
+<hr >
+
+=TEST=4.5=
+<hr         >
+
+
+=TEST=4.6=
+<hr         
+           
+   >
+
+=TEST=4.7=
+   <hr>     
+         <hr>           
+
+  <hr>        
+
+=TEST=4.8=
+< hr> < hr >
+
+=TEST=4.9=
+`<hr>`
+
+=TEST=4.10=
+```
+<hr>
+```
+
+=TEST=4.11=
+Hello<hr>World
